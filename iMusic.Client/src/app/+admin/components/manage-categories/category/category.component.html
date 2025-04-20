@@ -1,0 +1,13 @@
+<div class="wrapper">
+        <div class="img">
+            <img [src]="category.categoryImgUrl" alt="category img">
+            <div class="buttons">
+                <mat-icon class="edit" (click)="updateCategory(category)">edit</mat-icon>
+                <mat-icon class="delete" (click)="deleteCategory(category.id)">delete</mat-icon>
+            </div>
+        </div>
+        <div class="name">
+            {{ category.name }}
+        </div>  
+        
+</div>

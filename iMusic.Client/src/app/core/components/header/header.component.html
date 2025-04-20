@@ -1,0 +1,105 @@
+<header>
+  <div class="section-container header-wrapper">
+    <div class="content-block">
+      <button mat-button
+              class="burger-menu"
+              (click)="openSidebar()"
+              [disableRipple]="true">
+        <mat-icon [svgIcon]="'burger-icon'"></mat-icon>
+      </button>
+
+      <a [routerLink]="['landing']"
+         class="header-logo">
+        <mat-icon [svgIcon]="'logo-icon'"></mat-icon>
+
+        <p>{{'general.eloquentiLabel'  }}</p>
+      </a>
+
+      <div *ngIf="currentUser"
+           class="header-navigation">
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Admin, applicationRole.SuperAdmin]"
+           [routerLink]="['users']"
+           routerLinkActive="active">{{'general.usersLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Admin, applicationRole.SuperAdmin, applicationRole.Customer]"
+           [routerLink]="['bookings']"
+           routerLinkActive="active">{{'general.bookingsLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Admin, applicationRole.SuperAdmin, applicationRole.Customer]"
+           [routerLink]="['requests']"
+           routerLinkActive="active">{{'general.requestsLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Customer]"
+           [routerLink]="['inbox']"
+           routerLinkActive="active">{{'general.inboxLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Editor, applicationRole.Translator, applicationRole.EditorPending, applicationRole.TranslatorPending]"
+           [routerLink]="['profile']"
+           routerLinkActive="active"
+           [ngClass]="{'disabled': currentUser?.roles | checkRole: [applicationRole.EditorPending, applicationRole.TranslatorPending]}">{{'general.profileLabel'
+           }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Admin, applicationRole.SuperAdmin]"
+           [routerLink]="['articles-list']"
+           routerLinkActive="active">{{'general.blogLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Admin, applicationRole.SuperAdmin]"
+           [routerLink]="['discounts']"
+           routerLinkActive="active">{{'general.discountsLabel'  }}
+        </a>
+
+        <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Editor, applicationRole.Translator, applicationRole.EditorPending, applicationRole.TranslatorPending]"
+           [routerLink]="['faq']"
+           routerLinkActive="active"
+           [ngClass]="{'disabled': currentUser?.roles | checkRole: [applicationRole.EditorPending, applicationRole.TranslatorPending]}">{{'general.fAQsLabel'
+           }}
+        </a>
+      </div>
+
+
+      <div class="header-action">
+        <mus-freelancer-status *ngIf="!(currentUser?.userRoles | checkRole: [applicationRole.AdminRole])"
+                               class="freelancer-status"
+                               [useResponsiveStyles]="true"></mus-freelancer-status>
+
+    
+        <button #matMenuTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="authMenu"
+                [ngClass]="{'opened': matMenuTrigger.menuOpen}"
+                class="header-auth-block"
+                mat-button>
+          <mat-icon [svgIcon]="'burger-icon'"
+                    class="burger-icon"></mat-icon>
+
+          <mat-icon [svgIcon]="'person-icon'"
+                    class="person-icon"></mat-icon>
+        </button>
+
+        <mat-menu #authMenu="matMenu">
+          <ng-container *ngIf="!currentUser">
+            <a [routerLink]="['/auth/sign-up-as-customer']"
+               mat-menu-item>{{'auth.signUpLabel'  }}</a>
+            <a [routerLink]="['/auth/sign-in']"
+               mat-menu-item>{{'auth.logInLabel'  }}</a>
+          </ng-container>
+
+          <ng-container *ngIf="currentUser">
+            <a *ngIf="currentUser?.roles | checkRole: [applicationRole.Customer]"
+               [routerLink]="['/account']"
+               mat-menu-item>{{'general.accountLabel'  }}
+            </a>
+            <button (click)="logout()"
+                    mat-menu-item>{{'auth.logoutLabel'  }}
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</header>

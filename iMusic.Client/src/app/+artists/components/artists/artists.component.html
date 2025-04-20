@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="singers">
+        <div class="title" >
+            <div class="text">Artists: </div>
+        </div>
+
+        <div class="list-albums">
+            <div *ngFor="let singer of singers"  class="album">
+                <div class="img singer-img">
+                    <img [src]="singer?.userImgUrl ?? '../../../../assets/images/singer.png'" alt="singer image">
+                    <div  class="actions">
+                        <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                        <mat-menu #menu="matMenu">
+                            <button (click)="shareSinger(singer)" mat-menu-item >
+                                Share
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="name">
+                    <div (click)="goToSinger(singer.id)">{{ singer.userName | titlecase }}</div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    
+</div>

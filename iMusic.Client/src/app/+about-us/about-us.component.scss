@@ -1,0 +1,144 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  flex: 2;
+  width: 100%;
+}
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  .title{
+    mat-icon{
+      font-size: 30px;
+    }
+    margin: 0 10%;
+
+      background-image: linear-gradient(291deg, rgba(193,139,230,1) 0%, rgba(217,93,238,1) 3%, rgba(226,104,157,1) 22%, rgba(252,176,69,1) 94%);
+      background-clip: text;
+      color: transparent;
+      margin-top: 3vw;
+      font-size: 50px;
+      line-height: 120%;
+      height: fit-content;
+      text-align: center;
+  }
+  .link-button{
+     margin: 2vw;
+      border-radius: 8px;
+      background-color: rgb(252, 165, 157);
+      button{
+          outline: none;
+          text-decoration: none;
+          border-radius: 8px;
+          position: relative;
+          top: -10px;
+          left: -10px;
+          background-color: rgb(77, 43, 43);
+          color: aliceblue;
+          font-size: 25px;
+          padding: 30px 50px;
+          font-weight: 500;
+          border: 2px solid rgb(182, 31, 31);
+          &:hover{
+              color: rgb(236, 215, 98);
+              cursor: pointer;
+              top:0;
+              left: 0;
+              transition: 0.5s ease-in-out;
+          }
+      }
+     
+  }
+  .description{
+      margin-top: 20px;
+      width: 70%;
+      color: rgb(107, 55, 55);
+      font-size: 2vw;
+      line-height: 120%;
+      text-align: center;
+  }
+  .inner-wrppaer{
+      width: 80% ;
+      margin: 2vw 4vw;
+      background-color: rgb(236, 119, 98);
+      border-radius: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .inner-title{
+          width: 50%;
+          text-align: center;
+          margin: 3vw;
+          font-size: 3vw;
+          color: rgb(39, 34, 56);
+          font-weight: 400;
+          line-height: 120%;
+          span{
+            font-size: 140%;
+          }
+      }
+      .song-article{
+          background-color: rgb(117, 51, 68);
+          border-radius: 60px;
+          width: 60%;
+          margin: 3vw;
+          display: flex;
+          padding: 3vw;
+          position: relative;
+          .song-title{
+              color: rgb(242, 218, 81);
+              margin: 2vw;
+              font-size: 2vw;
+              line-height: 120%;
+              width: 23vw;
+          }
+          .link-see-button{
+              margin: 10vw 3vw 3vw 3vw;
+               border-radius: 8px;
+               background-color: rgb(161, 97, 103);
+               width: fit-content;
+               button{
+                   outline: none;
+                   text-decoration: none;
+                   border-radius: 8px;
+                   position: relative;
+                   top: -10px;
+                   left: -10px;
+                   background-color: rgb(180, 96, 96);
+                   color: aliceblue;
+                   font-size: 25px;
+                   padding: 1.5vw 2.5vw;
+                   font-weight: 500;
+                   border: 2px solid rgb(153, 12, 19);
+                   &:hover{
+                      color: rgb(236, 215, 98);
+                       cursor: pointer;
+                       top:0;
+                       left: 0;
+                       transition: 0.5s ease-in-out;
+                   }
+               }
+          }
+          .song-img{
+              position: relative;
+              left: -1vw;
+              min-width: 30vw;
+              min-height: 30vw;
+              background-color: rgb(255, 255, 255);
+              border-radius: 60px;
+              border: 5px solid rgb(246, 3, 3);
+              box-shadow: 0px 0px 25px rgb(246, 3, 3);
+              img{
+                border-radius: 60px;
+              }
+          }
+      }
+  }
+}
+img{
+  height: 100%;
+  width: 100%;
+}

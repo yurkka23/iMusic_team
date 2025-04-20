@@ -1,0 +1,111 @@
+<div class="songs-wrapper">
+    <section class="section">   
+        <h1 class="page-title">
+            Songs:
+        </h1>
+    </section>
+    <div class="table-songs">
+        <table [dataSource]="songs"
+        class="table"
+        mat-table
+        >
+
+   <ng-container matColumnDef="name">
+     <th *matHeaderCellDef class="label name"
+         mat-header-cell>
+         Name
+     </th>
+
+     <td *matCellDef="let element" mat-cell>
+       <div class="label" (click)="playSong(element)">
+        <div class="wrap-name">
+            <div class="img">
+                <img [src]="element.songImgUrl" alt="song image">
+            </div>
+            <div *ngIf="playingSong?.id === element?.id" class="animation-icon">
+              <span class="animation-span"></span>
+              <span class="animation-span"></span>
+              <span class="animation-span"></span>
+            </div>
+            <div class="text">
+                {{element.title | titlecase}}
+            </div>
+        </div>
+        
+       </div>
+     </td>
+   </ng-container>
+
+   <ng-container matColumnDef="singer">
+     <th *matHeaderCellDef class="label singer" mat-header-cell>
+        Singer
+     </th>
+
+     <td *matCellDef="let element" mat-cell>
+         <div class="label" [routerLink]="['/browse/singer' , element.singerId]">
+            <div class="link">
+                {{element.singerUserName}}
+            </div>
+         </div>
+     </td>
+   </ng-container>
+
+   <ng-container matColumnDef="album">
+     <th *matHeaderCellDef  class="label album" mat-header-cell>
+        Album
+     </th>
+
+     <td  *matCellDef="let element" class="label" mat-cell>
+      <span *ngIf="!element.albumTitle else link">
+        {{element?.albumTitle ?? "Single"}}
+      </span>
+      <ng-template #link>
+        <a [routerLink]="['/singer/album' , element.albumId]" class="link">
+          {{element.albumTitle }}
+        </a>
+      </ng-template>
+       
+     </td>
+   </ng-container>
+
+   <ng-container matColumnDef="time">
+     <th *matHeaderCellDef  class="label time"
+         mat-header-cell>
+         Time
+     </th>
+
+     <td *matCellDef="let element" class="label" mat-cell>
+       {{element.duration}}
+     </td>
+   </ng-container>
+
+
+   <ng-container matColumnDef="actions">
+     <th *matHeaderCellDef class="label" mat-header-cell>
+       Actions
+     </th>
+
+     <td *matCellDef="let element" class="actions" mat-cell>
+       <div  class="label">
+         <mat-icon [matMenuTriggerFor]="menu"
+                   class="icon">keyboard_control</mat-icon>
+
+         <mat-menu #menu="matMenu">
+          <button (click)="addToFavorite(element)" mat-menu-item>
+            Like
+          </button>
+          <button (click)="removeSong(element)" mat-menu-item>
+            Remove
+          </button>
+         </mat-menu>
+       </div>
+     </td>
+   </ng-container>
+
+   <tr *matHeaderRowDef="tableColumns" mat-header-row></tr>
+   <tr *matRowDef="let row; columns: tableColumns;" mat-row></tr> 
+ </table>
+        <p *ngIf="!songs.length" class="records-not-found">No Songs Found</p>
+    </div>
+
+</div>

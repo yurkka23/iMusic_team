@@ -1,0 +1,13 @@
+@import 'src/styles/variables';
+
+.validation-message {
+  font-family: $font-roboto;
+  padding-top: 12px;
+  color: $color-red;
+  font-size: $font-12;
+  width: max-content;
+  max-width: 100%;
+}
+
+
+

@@ -1,0 +1,27 @@
+@import 'src/styles/variables';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background: $default-linear-gradient;
+    padding: 15px 55px;
+    flex: 1;
+    
+    .add-category {
+        display: flex;
+        align-items: center;
+        color: red;
+        font-weight: 700;
+        margin-top: 28px;
+        cursor: pointer;
+        .icon {
+            margin-right: 12px;
+        }
+    }
+    .list-categories{
+        margin: 1em 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+}

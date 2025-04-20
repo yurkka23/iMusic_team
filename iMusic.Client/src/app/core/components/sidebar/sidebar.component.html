@@ -1,0 +1,149 @@
+<div class="layout"
+     [ngClass]="{'visible': isOpen}"
+     (click)="close()">
+</div>
+
+<div class="sidebar"
+     [ngClass]="{'open': isOpen}">
+  <div class="sidebar-header">
+    <a [routerLink]="['about-us']"
+       class="sidebar-logo">
+      <mat-icon class="icon">info</mat-icon>
+
+      <p>iMusic</p>
+    </a>
+  </div>
+
+  <div class="sidebar-content">
+    <div class="sidebar-navigation">
+      <!-- For all section -->
+      <a [routerLink]="['browse']"
+         routerLinkActive="active">
+         <mat-icon>grid_view</mat-icon>
+         Browse
+      </a> 
+      <a [routerLink]="['search']"
+         routerLinkActive="active">
+         <mat-icon>search</mat-icon>
+         Search
+      </a> 
+
+      <!-- Admin section -->
+      <div *ngIf="currentUser?.userRoles | checkRole: [applicationRole.AdminRole]"
+         class="title">
+         Agmin:
+      </div>
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.AdminRole]"
+         [routerLink]="['admin/manage-users']"
+         routerLinkActive="active">
+         <mat-icon>supervisor_account</mat-icon>
+         Manage users
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.AdminRole]"
+         [routerLink]="['admin/manage-singers']"
+         routerLinkActive="active">
+         <mat-icon>perm_contact_cal</mat-icon>
+         Manage singers
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.AdminRole]"
+         [routerLink]="['admin/manage-categories']"
+         routerLinkActive="active">
+         <mat-icon>type_specimen</mat-icon>
+         Manage categories
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.AdminRole]"
+         [routerLink]="['admin/become-singer']"
+         routerLinkActive="active">
+         <mat-icon>person_add_alt_1</mat-icon>
+         Become singer
+      </a> 
+
+      <!-- Singer section -->
+      <div *ngIf="currentUser?.userRoles | checkRole: [applicationRole.SingerRole]"
+         class="title">
+         Singer: 
+      </div>
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.SingerRole]"
+         [routerLink]="['singer/overview']"
+         routerLinkActive="active">
+         <mat-icon>view_kanban</mat-icon>
+         Overview
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.SingerRole]"
+         [routerLink]="['singer/your-songs']"
+         routerLinkActive="active">
+         <mat-icon>my_library_music</mat-icon>
+         Your songs
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.SingerRole]"
+         [routerLink]="['singer/your-albums']"
+         routerLinkActive="active">
+         <mat-icon>album</mat-icon>
+         Your albums
+      </a> 
+   
+      <!-- User, Singer, Admin section -->
+      <div *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         class="title">
+         Library
+      </div>
+
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['recently-added']"
+         routerLinkActive="active">
+         <mat-icon>access_time</mat-icon>
+         Recently Added
+      </a>
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['artists']"
+         routerLinkActive="active">
+         <mat-icon>settings_voice</mat-icon>
+         Artists
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['albums']"
+         routerLinkActive="active">
+         <mat-icon>view_carousel</mat-icon>
+         Albums
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['songs']"
+         routerLinkActive="active">
+         <mat-icon>music_note</mat-icon>
+         Songs
+      </a> 
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['favorite-list']"
+         routerLinkActive="active">
+         <mat-icon>favorite_outline</mat-icon>
+         Favorite list
+      </a> 
+
+
+      <div *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         class="title">
+         Playlists
+      </div>
+
+      <!-- playlists -->
+      <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['playlists']"
+         routerLinkActive="active">
+         <mat-icon>view_comfortable</mat-icon>
+         All Playlists
+      </a> 
+
+      <div *ngFor="let playlist of userPlaylists">
+         <a *ngIf="currentUser?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole, applicationRole.AdminRole]"
+         [routerLink]="['playlists/playlist', playlist.id]"
+         routerLinkActive="active">
+            <mat-icon>queue_music</mat-icon>
+            {{playlist.title}}
+         </a> 
+      </div>
+      
+      
+   
+    </div>
+  </div>
+</div>

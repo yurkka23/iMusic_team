@@ -1,0 +1,80 @@
+<div class="auth-block-wrapper">
+    <div class="auth-block-content">
+        <h2 class="auth-block-title">Welcome to iMusic</h2>
+  
+      <div [formGroup]="signUpFormGroup" class="auth-block-input-container form">
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+          <mat-label>FirstName</mat-label>
+  
+          <input formControlName="firstName" matInput placeholder="FirstName">
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="signUpFormGroup.controls.firstName">
+        </mus-control-validation-message>
+  
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+          <mat-label>LastName</mat-label>
+  
+          <input formControlName="lastName" matInput placeholder="LastName">
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="signUpFormGroup.controls.lastName">
+        </mus-control-validation-message>
+
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+            <mat-label>UserName</mat-label>
+    
+            <input formControlName="userName" matInput placeholder="UserName">
+          </mat-form-field>
+    
+          <mus-control-validation-message
+            [control]="signUpFormGroup.controls.userName">
+          </mus-control-validation-message>
+  
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput placeholder="Email">
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="signUpFormGroup.controls.email">
+        </mus-control-validation-message>
+  
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+          <mat-label>Password</mat-label>
+  
+          <input [type]="'password'" formControlName="password" matInput
+                 placeholder="Password">
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="signUpFormGroup.controls.password">
+        </mus-control-validation-message>
+  
+        <mat-form-field appearance="outline" class="auth-block-form-field">
+          <mat-label>Confirm Password</mat-label>
+  
+          <input [type]="'password'" formControlName="confirmPassword" matInput
+                 placeholder="Confirm Password">
+
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="signUpFormGroup.controls.confirmPassword">
+        </mus-control-validation-message>
+  
+      </div>
+  
+      <button (click)="signUpFormSubmit()" [disabled]="signUpFormGroup.invalid" class="default-blue-button"
+              mat-button>Sign Up</button>
+  
+        <div class="sign-in-divider">
+            <p>Already have an acount?</p>
+            <a [routerLink]="['/auth/sign-in']" class="sign-in" >Sign in</a>
+        </div>
+    </div>
+  </div>
+  
+  

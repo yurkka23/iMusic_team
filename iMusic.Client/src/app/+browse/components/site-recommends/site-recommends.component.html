@@ -1,0 +1,42 @@
+<div class="recommends-imusic">
+    <div class="title">
+        <div class="text">iMusic recommends</div>
+    </div>
+
+    <div class="list-albums">
+        <div *ngFor="let album of albums"  class="album">
+            <div class="img">
+                <img  [src]="album.albumImgUrl" alt="album img">
+                <div *ngIf="!album?.songs.indexOf(playingSong)" class="animation-icon-big" >
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                  </div>
+                <div class="buttons" (click)="playSongs(album)" *ngIf="album?.songs.indexOf(playingSong)">
+                    <mat-icon class="options" >play_arrow</mat-icon>
+                </div>
+                <div  class="actions">
+                    <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="user" (click)="addToFavotiteAlbum(album)" mat-menu-item >
+                            Like
+                        </button>
+                        <button *ngIf="user" (click)="addToAlbums(album)" mat-menu-item >
+                            Add to library
+                        </button>
+                        
+                        <button (click)="shareAlbum(album)" mat-menu-item >
+                            Share
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="name">
+                <div (click)="goToAlbum(album.id)">{{ album.title | titlecase }}</div>
+                <div>-</div>
+                <div (click)="goToCategory(album.category.id)" >{{album.category.name | titlecase}}</div>
+            </div>  
+            
+        </div>
+    </div>
+</div>

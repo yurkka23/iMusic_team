@@ -1,0 +1,34 @@
+.wrapper {
+  min-height: 100vh;
+
+  .sidebar{
+    z-index: 99;
+    width: 17vw;
+    position: fixed;
+    height: 100%;
+  }
+
+  // .buffer{
+  //   position: fixed;
+  //   right: 0;
+  // }
+  .content{
+    margin-left: 17vw;
+    .player{
+      z-index: 99;
+      position: sticky;
+      top: 0px;
+    }
+  }
+  // display: flex;
+  // flex-direction: column;
+ 
+  // .open{
+  //   margin-left: 17vw;
+  //   width: 83vw;
+  //   min-height: 100vh;
+  // }
+  // .player{
+  //   margin-left: 17vw;
+  // }
+}

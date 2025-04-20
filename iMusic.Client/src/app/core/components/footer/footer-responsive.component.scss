@@ -1,0 +1,25 @@
+@import 'src/styles/variables';
+
+@media (max-width: $desktop-big) {
+  .footer-wrapper {
+    padding: 20px 100px 12px 100px;
+  }
+}
+
+@media (max-width: $laptop-big) {
+  .footer-wrapper {
+    padding: 18px 85px 12px 85px;
+  }
+}
+
+@media (max-width: $tablet-big) {
+  .footer-wrapper {
+    padding: 18px 65px 12px 65px;
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .footer-wrapper {
+    padding: 18px 20px 12px 20px;
+  }
+}

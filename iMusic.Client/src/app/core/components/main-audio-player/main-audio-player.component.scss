@@ -1,0 +1,169 @@
+.wrapper{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid rgb(206, 205, 205);
+    padding: 7px;
+    background-color:rgb(247, 252, 255);
+    .media {
+        display: flex;
+        width: 100%;
+
+        .control-buttons{
+            button{
+                border-radius: 100%;
+                padding: 10px;
+            }
+            display: flex;
+            justify-content: center;
+            width:15%;
+            .mat-icon {
+                color: rgb(139, 139, 139) !important;
+                height: 25px !important;
+                width: 25px !important;
+                font-size: 25px !important;
+            }
+            mat-icon:hover{
+                color: rgb(53, 52, 52) !important;
+            }
+        }
+        .song-info{
+            margin-right: 1.5vw;
+            border: 1px solid rgb(199, 197, 197);
+            border-radius: 3px;
+            width: 45vw;
+            height: 7vh;
+            display: flex;
+            position: relative;
+            .last{
+                position: absolute;
+                bottom: 0;
+                left: 6em;
+                color: grey;
+                font-size: 10px;
+            }
+            .remain{
+                position: absolute;
+                bottom: 0;
+                right: 1em;
+                color: grey;
+                font-size: 10px;
+            }
+            .slider-full{
+                position: absolute;
+                bottom: -1.5em;
+                right: -0.5em;
+                left: 2.7em;
+            }
+            &:hover{
+                .info-song-desc{
+                    color: red !important;
+                }
+            }
+            .img-song{
+                width: 7vh;
+                height: calc(7vh - 1px);
+                object-fit: contain;
+                img{
+                    border-radius: 2px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .desc-song{
+                width: 37vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .title{
+                    font-size: 15px;
+                    font-weight: 600;
+                    margin: 0;
+                    padding: 0;
+                }
+                .info-song-desc{
+                    display: flex;
+                    font-size: 12px;
+                    color: grey;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    .space{
+                        padding: 0 5px;
+                    }
+                }
+            }
+            
+        }
+        .volume{
+
+            display: flex;
+            align-items: center;
+            .mat-icon {
+                color: rgb(189, 184, 184) !important;
+                height: 17px !important;
+                width: 17px !important;
+                font-size: 17px !important;
+            }
+            mat-icon:hover{
+                cursor: pointer;
+                color: rgb(53, 52, 52) !important;
+            }
+        }
+        .song-in-queue{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            width: 4%;
+            .mat-icon {
+                color: rgb(139, 139, 139) !important;
+                height: 25px !important;
+                width: 25px !important;
+                font-size: 25px !important;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .acount{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            width: 10%;
+            padding: 3px;
+            button{
+                border: none;
+                cursor: pointer;
+                background-color: transparent;
+
+            }
+            .sign-in{
+                background-color: red;
+                display: flex;
+                justify-content: center;
+                border-radius: 7px;
+                div{
+                    margin-top: 9px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                    color: aliceblue;
+                    font-weight: 600;
+                }
+                .mat-icon {
+                    color: rgb(255, 255, 255) !important;
+                    
+                }
+            }
+            .mat-icon {
+                color: red !important;
+                height: 35px !important;
+                width: 35px !important;
+                font-size: 35px !important;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }   
+}

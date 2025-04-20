@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <div class="category">
+        <div class="img">
+            <img [src]="category?.categoryImgUrl" alt="category image">
+        </div>
+        <div class="description">
+            <div class="title">{{category?.name | titlecase }}</div>
+            <div class="play">
+                <button (click)="playCategory()" mat-button class="warn"><mat-icon>play_arrow</mat-icon> Play</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-songs">
+      
+        <div *ngFor="let song of songs" class="song"
+        [ngClass]="{'playing': playingSong?.id === song.id}" >
+            <div class="img" (click)="playSong(song)">
+                <img [src]="song?.songImgUrl" alt="song image">
+            </div>
+            <div *ngIf="playingSong?.id === song.id" class="animation-icon">
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+              </div>
+            <div class="name" (click)="playSong(song)">{{song?.title}}</div>
+            <div class="album" (click)="goToAlbum(song?.albumId)" >Album: {{song?.albumTitle ?? "Single"}}</div>
+            <div class="singer" (click)="goToSinger(song.singerId)">Singer: {{song?.singerUserName}}</div>
+            <div class="duration" (click)="playSong(song)">{{song?.duration}}</div>
+            <div  class="actions">
+                <mat-icon [matMenuTriggerFor]="menu" class="icon">keyboard_control</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button *ngIf="user" (click)="addToFavotiteSong(song)" mat-menu-item >
+                        Like
+                    </button>
+                    <button *ngIf="user" (click)="addToSongs(song)" mat-menu-item >
+                        Add to library
+                    </button>
+                    <div *ngIf="user">
+                        <button *ngFor="let playlist of playlists" (click)="addToPlaylist(song,playlist)" mat-menu-item >
+                            Add to Playlist {{playlist.title}}
+                        </button>
+                    </div>
+                    <button (click)="shareSong(song)" mat-menu-item>
+                      Share
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div>{{songs?.length}} songs, {{totalLength.toFixed(0)}} minutes</div>
+    </div>
+</div>

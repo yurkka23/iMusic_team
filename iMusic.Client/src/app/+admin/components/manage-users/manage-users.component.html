@@ -1,0 +1,74 @@
+<div class="wrapper">
+    <div class="title">Manage users</div>
+    <div class="list-requests">
+        <div *ngIf="users?.length === 0" class="no-items">
+            No users.
+        </div>
+        <div *ngFor="let user of users">
+            <div class="user">
+
+                <div class="img">
+                    <div *ngIf="!user?.userImgUrl; else name"
+                         class="profile-photo-block-name">
+                         {{user?.firstName[0] | uppercase}}
+                    </div>
+                    <ng-template #name>
+                        <img musBecomeVisibleOnLoaded
+                             [src]="user?.userImgUrl"
+                             alt="avatar"
+                             class="profile-photo hidden">
+                    </ng-template>
+
+                </div>
+                <div class="body">
+                    <div class="username">@{{user?.userName}}</div>
+                    <div class="username">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</div>
+                    <div class="email">{{user?.email}}</div>
+                    <div class="about-us">{{user?.aboutMe | titlecase}}</div>
+                    <div class="buttons">
+                        <button (click)="showMore(user.id)" mat-button color="primary">Show more</button>
+                        <button (click)="banUser(user.id)" mat-button color="warn">Ban user</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="title">Manage banned users</div>
+    <div class="list-requests">
+        <div *ngIf="bannedUsers?.length === 0" class="no-items">
+            No banned users.
+        </div>
+        <div *ngFor="let user of bannedUsers">
+            <div class="user">
+
+                <div class="img">
+                    <div *ngIf="!user?.userImgUrl; else name"
+                         class="profile-photo-block-name">
+                         {{user?.firstName[0] | uppercase}}
+                    </div>
+                    <ng-template #name>
+                        <img musBecomeVisibleOnLoaded
+                             [src]="user?.userImgUrl"
+                             alt="avatar"
+                             class="profile-photo hidden">
+                    </ng-template>
+
+                </div>
+                <div class="body">
+                    <div class="username">@{{user?.userName}}</div>
+                    <div class="username">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</div>
+                    <div class="email">{{user?.email}}</div>
+                    <div class="about-us">{{user?.aboutMe | titlecase}}</div>
+                    <div class="buttons">
+                        <button (click)="showMore(user.id)" mat-button color="primary">Show more</button>
+                        <button (click)="unbanUser(user.id)" mat-button color="warn">Unban user</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

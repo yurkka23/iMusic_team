@@ -1,0 +1,130 @@
+<div class="wrapper">
+    <div class="singer">
+        <div class="img">
+            <img [src]="user?.userImgUrl ?? '../../../../assets/images/singer.png'" alt="playlist image">
+        </div>
+        <div class="description">
+            <div class="username">{{user?.userName | titlecase }}</div>
+            <div class="name">{{user?.firstName | titlecase }} {{user?.lastName | titlecase }}</div>
+            <div class="about">About user: {{user?.aboutMe | titlecase }} </div>
+            <div class="contact">Email: {{user?.email}}</div>
+        </div>
+    </div>
+
+    <div class="top-songs">
+        <div class="title">
+            <div class="text">Added songs:</div>
+        </div>
+
+        <div class="list-top-songs">
+            <div *ngFor="let song of addedSongs" class="song" (click)="goToSong(song.id)">
+                <div class="img">
+                    <img [src]="song?.songImgUrl" alt="song image">
+                </div>
+                <div class="name">{{song?.title}}</div>
+                <div class="duration">{{song?.duration}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="title">
+        <div class="text">Added albums:</div>
+    </div>
+
+    <div class="list-albums">
+        <div *ngFor="let album of addedAlbums"  class="album" (click)="goToAlbum(album.id)">
+            <div class="img">
+                <img  [src]="album.albumImgUrl" alt="album img">
+            </div>
+            <div class="name">
+                <div (click)="goToAlbum(album.id)">{{ album.title | titlecase }}</div>
+                <div>-</div>
+                <div (click)="goToCategory(album.category.id)" >{{album.category.name | titlecase}}</div>
+            </div>  
+            
+        </div>
+    </div>
+
+    <div class="title">
+        <div class="text">User playlists:</div>
+    </div>
+
+    <div class="list-albums">
+        <div *ngFor="let playlist of userPlaylists"  class="album" (click)="goToPlaylist(playlist.id)">
+            <div class="img">
+                <img  [src]="playlist.playlistImgUrl" alt="album img">
+            </div>
+            <div class="name">
+                <div (click)="goToPlaylist(playlist.id)">{{ playlist.title | titlecase }}</div>
+              
+            </div>  
+            
+        </div>
+    </div>
+
+    <div class="title">
+        <div class="text">User favorite list:</div>
+    </div>
+    <div class="fav-list-wrapper">
+        <div class="top-songs" *ngIf="favoritelist?.songs.length > 0">
+            <div class="title">
+                <div class="text">Songs:</div>
+            </div>
+            <div class="list-top-songs">
+                <div *ngFor="let song of favoritelist?.songs" class="song" (click)="goToSong(song.id)">
+                    <div class="img" >
+                        <img [src]="song?.songImgUrl" alt="song image">
+                    </div>
+                    
+                    <div class="name">{{song?.title}}</div>
+                    <div class="duration">{{song?.duration}}</div>
+                   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="recommends-imusic" *ngIf="favoritelist?.albums.length > 0">
+            <div class="title">
+                <div class="text">Albums:</div>
+            </div>
+    
+            <div class="list-albums">
+                <div *ngFor="let album of favoritelist?.albums" (click)="goToAlbum(album.id)"  class="album">
+                    <div class="img" >
+                        <img [src]="album.albumImgUrl" alt="album img">
+                       
+                      
+                    </div>
+                    <div class="name">
+                        <div (click)="goToAlbum(album.id)">{{ album.title | titlecase }}</div>
+                        <div>-</div>
+                        <div (click)="goToCategory(album.category.id)" >{{album.category.name | titlecase}}</div>
+                    </div>  
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <div class="playlists" *ngIf="favoritelist?.playlists.length > 0">
+            <div class="title" >
+                <div class="text">Playlists: </div>
+            </div>
+    
+            <div class="list-albums">
+                <div *ngFor="let playlist of favoritelist?.playlists" (click)="goToPlaylist(playlist.id)"  class="album">
+                    <div class="img">
+                        <img  [src]="playlist.playlistImgUrl" alt="category img">
+                    </div>
+                    <div class="name">
+                        <div (click)="goToPlaylist(playlist.id)">{{ playlist.title | titlecase }}</div>
+                    </div>  
+                          
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

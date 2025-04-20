@@ -1,0 +1,55 @@
+@import 'src/styles/variables';
+
+.footer-wrapper {
+  padding: 24px 120px 12px 120px;
+  background-color: $color-white;
+  box-shadow: $footer-box-shadow;
+
+  .content-block {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .footer-title {
+    font-family: $font-roboto;
+    font-weight: bold;
+    font-size: $font-12;
+    color: $color-dark-blue;
+  }
+
+  .footer-navigation-links {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      font-family: $font-roboto;
+      font-size: $font-12;
+      line-height: 11px;
+      margin-top: 6px;
+      color: $color-grey;
+      text-decoration: none;
+    }
+  }
+
+  .footer-social-media {
+    &-links {
+      padding-top: 6px;
+
+      .icon {
+        width: 34px;
+        padding: 0 3px;
+      }
+    }
+  }
+
+  .footer-notice {
+    padding-top: 12px;
+    font-family: $font-roboto;
+    font-size: $font-12;
+    color: $color-grey;
+    border-top: 1px solid $color-light-grey;
+    margin: 24px auto 0 auto;
+    max-width: 1200px;
+  }
+}

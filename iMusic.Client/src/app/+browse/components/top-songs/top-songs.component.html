@@ -1,0 +1,44 @@
+<div class="top-songs">
+    <div class="title">
+        <div class="text">Top songs</div>
+    </div>
+
+    <div class="list-top-songs">
+        <div *ngFor="let song of topSongs" class="song"
+             [ngClass]="{'playing': playingSong?.id === song.id}">
+            <div class="img" (click)="playTopSong(song)">
+                <img [src]="song?.songImgUrl" alt="song image">
+            </div>
+            <div *ngIf="playingSong?.id === song.id" class="animation-icon">
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+              </div>
+            <div class="name" (click)="playTopSong(song)">{{song?.title}}</div>
+            <div class="username" (click)="goToSinger(song?.singerId)">Singer: {{song?.singerUserName}}</div>
+            <div class="album" (click)="goToAlbum(song?.albumId ?? '')">Album: {{song?.albumTitle ?? "Single"}}</div>
+
+            <div class="duration" (click)="playTopSong(song)">{{song?.duration}}</div>
+            <div  class="actions">
+                <mat-icon [matMenuTriggerFor]="menu" class="icon">keyboard_control</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button *ngIf="user" (click)="addToFavotiteSong(song)" mat-menu-item >
+                        Like
+                    </button>
+                    <button *ngIf="user" (click)="addToSongs(song)" mat-menu-item >
+                        Add to library
+                    </button>
+                    <div *ngIf="user">
+                        <button *ngFor="let playlist of playlists" (click)="addToPlaylist(song,playlist)" mat-menu-item >
+                            Add to Playlist {{playlist.title}}
+                        </button>
+                    </div>
+                    
+                    <button (click)="shareSong(song)" mat-menu-item>
+                      Share
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</div>

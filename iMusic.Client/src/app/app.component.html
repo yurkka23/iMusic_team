@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="sidebar">
+    <mus-sidebar></mus-sidebar>
+  </div>
+  
+ 
+
+  <div class="content">
+    <div class="player">
+      <mus-main-audio-player></mus-main-audio-player> 
+    </div>
+    <div class="buffer">
+      <mus-buffer-sidebar></mus-buffer-sidebar>
+    </div>
+    <div [ngClass]="{'open': true}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+ 
+</div>
+
+<notifier-container></notifier-container>
+
+<mus-spinner></mus-spinner>

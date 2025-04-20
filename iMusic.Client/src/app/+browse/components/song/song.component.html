@@ -1,0 +1,57 @@
+<div class="wrapper">
+    <div class="album">
+        <div class="img">
+            <img [src]="song?.songImgUrl" alt="song image">
+        </div>
+        <div class="description">
+            <div class="title">{{song?.title | titlecase }}</div>
+            <div class="singer" (click)="goToSinger(song?.singerId)">Singer: {{song?.singerUserName | titlecase }}</div>
+            <div class="category" (click)="goToCategory(song.category.id)">Category: {{song?.category?.name | titlecase }}</div>
+            <div class="category" (click)="goToAlbum(song.albumId)">Album: {{song?.albumTitle ?? 'Single' | titlecase }}</div>
+
+            <div class="play">
+                <button (click)="playSong(song)" mat-button class="warn"><mat-icon>play_arrow</mat-icon> Play</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-songs">
+        <div  class="song" [ngClass]="{'playing': playingSong?.id === song?.id}" >
+            <div class="img" (click)="playSong(song)">
+                <img [src]="song?.songImgUrl" alt="song image">
+            </div>
+            <div *ngIf="playingSong?.id === song?.id" class="animation-icon">
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+              </div>
+            <div class="name" (click)="playSong(song)">{{song?.title}}</div>
+            <div class="duration" (click)="playSong(song)">{{song?.duration}}</div>
+            <div  class="actions">
+                <mat-icon [matMenuTriggerFor]="menu" class="icon">keyboard_control</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button *ngIf="user" (click)="addToFavotiteSong(song)" mat-menu-item >
+                        Like
+                    </button>
+                    <button *ngIf="user" (click)="addToSongs(song)" mat-menu-item >
+                        Add to library
+                    </button>
+                    <div *ngIf="user">
+                        <button *ngFor="let playlist of playlists" (click)="addToPlaylist(song,playlist)" mat-menu-item >
+                            Add to Playlist {{playlist.title}}
+                        </button>
+                    </div>
+                    
+                    <button (click)="shareSong(song)" mat-menu-item>
+                      Share
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div>Created: {{song?.createdTime | date}}</div>
+        <div>{{song?.duration.toFixed(0)}} minutes</div>
+    </div>
+</div>

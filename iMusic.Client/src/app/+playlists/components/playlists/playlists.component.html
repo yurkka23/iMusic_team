@@ -1,0 +1,51 @@
+<div class="albums-wrapper">
+    <section class="section">   
+        <h1 class="page-title">
+            Playlists:
+        </h1>
+        <div class="break-line"></div>
+    </section>
+    <section class="section">
+        <div (click)="addPlaylist()" class="add-album">
+            <mat-icon class="icon">add_circle</mat-icon>
+            <p>Add Playlist</p>
+        </div>
+    </section>
+    <div class="list-albums">
+        <div *ngFor="let playlist of playlists"  class="album">
+            <div class="img">
+
+                <div *ngIf="!playlist?.songs.indexOf(playingSong)" class="animation-icon-big">
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                </div>
+
+                <div class="button-play">
+                    <mat-icon (click)="playPlaylist(playlist)" *ngIf="playlist?.songs.indexOf(playingSong)" class="options" >play_arrow</mat-icon>
+                </div>
+                <img  [src]="playlist.playlistImgUrl" alt="category img">
+                <div class="buttons">
+                    <mat-icon [matMenuTriggerFor]="menu" class="options" >keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="editPlaylist(playlist)" mat-menu-item>
+                          Edit
+                        </button>
+                        <button (click)="addPlaylistSongs()" mat-menu-item>
+                            Add songs
+                        </button>
+                        <button (click)="deletePlaylist(playlist.id)" mat-menu-item>
+                          Delete
+                        </button>
+                      </mat-menu>
+                </div>
+
+            </div>
+            <div class="name"  [routerLink]="['/playlists/playlist' , playlist.id]">
+                {{ playlist?.title | titlecase }}
+            </div>  
+            
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,97 @@
+<div class="wrapper">
+    <div class="media">
+           <div class="control-buttons">
+              <button (click)="prev()" [disabled]="isFirstPlaying" mat-button>
+                <mat-icon>fast_rewind</mat-icon>
+              </button>
+             <button *ngIf="audio.paused" (click)="play()" mat-button>
+                <mat-icon>play_arrow</mat-icon>
+              </button> 
+              <button *ngIf="!audio.paused" (click)="play()" mat-button >
+                <mat-icon >pause</mat-icon>
+              </button>
+              <button (click)="next()" [disabled]="isLastPlaying" mat-button >
+                <mat-icon >fast_forward</mat-icon>
+              </button>
+           </div>
+         
+
+           <div class="song-info">
+                <div *ngIf="currentSong" class="last">
+                    {{ currentTime }}
+                </div>
+                <div *ngIf="currentSong" class="remain">
+                    {{ musicLength }}
+                </div>
+                <mat-slider *ngIf="currentSong"
+                    (input)="durationSlider($event)"
+                    class="slider-full"
+                    value="{{ audio.readyState === 0 ? 0 : audio.currentTime }}"
+                    min="0" max="{{ duration }}">
+                </mat-slider>
+                <div class="img-song">
+                    <img [src]="currentSong?.songImgUrl ?? '../../../../../assets/images/old-music-file.jpg'" alt="song">
+                </div>
+                <div class="desc-song" *ngIf="currentSong">
+                    <div class="title">
+                        {{currentSong?.title}}
+                    </div>
+                    <div class="info-song-desc">
+                        <div class="singer">
+                            {{currentSong?.singerUserName}}
+                        </div>
+                        <div class="space"> - </div>
+                        <div class="album-name">
+                            {{currentSong?.albumTitle ?? "Single"}}
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!currentSong" class="desc-song">
+                    <mat-icon>info</mat-icon>
+                </div>
+           </div>
+
+           <div class="volume">
+            <mat-icon>volume_up</mat-icon>
+            <mat-slider (input)="volumeSlider($event)" class="time-slider" min="0" max="1" step="0.01" [value]="'50'" ></mat-slider><!--(input)="onVolumeChange($event)"-->
+           </div>
+
+           <div class="song-in-queue">
+                <mat-icon (click)="openSidebarBuffer(true)" *ngIf="!isOpenBuffer">speaker_notes</mat-icon>
+                <mat-icon (click)="openSidebarBuffer(false)" *ngIf="isOpenBuffer">speaker_notes_off</mat-icon>
+           </div>
+
+           <div class="acount">
+                <button #matMenuTrigger="matMenuTrigger"
+                    [matMenuTriggerFor]="authMenu"
+                    [ngClass]="{'opened': matMenuTrigger.menuOpen}">
+                    <div *ngIf="!currentUser" class="sign-in">
+                        <mat-icon>person</mat-icon>
+                        <div>Sign in</div>
+                    </div>
+                    <div *ngIf="currentUser">
+                        <mat-icon>account_circle</mat-icon>
+                    </div>
+                </button>
+
+                <mat-menu #authMenu="matMenu">
+                    <ng-container *ngIf="!currentUser">
+                        <a [routerLink]="['/auth/sign-up']"
+                            mat-menu-item>Sign up</a>
+                        <a [routerLink]="['/auth/sign-in']"
+                            mat-menu-item>Sign in</a>
+                    </ng-container>
+  
+                    <ng-container *ngIf="currentUser">
+                        <a [routerLink]="['acount']"
+                           mat-menu-item>
+                            Account
+                        </a>
+                        <button (click)="logout()" mat-menu-item>
+                            Logout
+                        </button>
+                    </ng-container>
+                </mat-menu>
+            </div> 
+      </div>
+</div>

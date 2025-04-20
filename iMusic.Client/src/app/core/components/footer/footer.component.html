@@ -1,0 +1,38 @@
+<footer>
+  <div class="footer-wrapper">
+    <div class="content-block">
+      <div class="footer-navigation-links">
+        <h3 class="footer-title">{{'general.eloquentiLabel'  }}</h3>
+
+        <a [routerLink]="['about-us']">{{'general.aboutUsLabel'  }}</a>
+        <a [routerLink]="['faq']">{{'general.fAQsLabel'  }}</a>
+        <a [routerLink]="['blog']">{{'general.blogLabel'  }}</a>
+        <a [routerLink]="['contact-us']">{{'general.contactUsLabel'  }}</a>
+      </div>
+
+      <div class="footer-social-media">
+        <h3 class="footer-title">{{'general.stayConnectedLabel'  }}</h3>
+
+        <div class="footer-social-media-links">
+          <a href="https://twitter.com/eloquenti" target="_blank">
+            <mat-icon [svgIcon]="'twitter-icon'" class="icon"></mat-icon>
+          </a>
+
+          <a href="https://www.instagram.com/eloquenti_official" target="_blank">
+            <mat-icon [svgIcon]="'instagram-icon'" class="icon"></mat-icon>
+          </a>
+
+          <a href="https://www.facebook.com/Eloquenti" target="_blank">
+            <mat-icon [svgIcon]="'facebook-icon'" class="icon"></mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-notice">© 2023 iMusic •
+      <a routerLink="terms-and-conditions" target="_blank">Terms and Conditions</a> •
+
+      <a routerLink="privacy-policy" target="_blank">Privacy Policy</a>
+    </p>
+  </div>
+</footer>

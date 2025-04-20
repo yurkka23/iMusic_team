@@ -1,0 +1,24 @@
+@import "src/styles/variables";
+
+.snackbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .message {
+    font-size: $font-14;
+    font-family: $font-roboto;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .icon-wrapper {
+    padding-left: 12px;
+
+    .icon {
+      height: 16px;
+      width: 16px;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import 'variables';
+
+button.default-button {
+  background-color: $color-blue;
+  font-weight: 700;
+  font-size: $font-16;
+  padding: 10px 0;
+  width: 100px;
+  color: $color-white;
+  border-radius: 30px;
+  display: block;
+
+  &:disabled {
+    background-color: $color-blue;
+    opacity: .4;
+  }
+
+  &.grey-button {
+    background-color: $color-light-grey;
+  }
+  &.red-button {
+    background-color: $color-red;
+  }
+
+  &.medium {
+    width: max-content;
+    padding: 10px 24px;
+  }
+}
+
+.default-blue-button {
+  background-color: $color-blue;
+  color: $color-white;
+  font-weight: bold;
+  display: block;
+
+  &:disabled {
+    background-color: $color-blue;
+    opacity: .4;
+  }
+
+  &.grey-button {
+    background-color: $color-light-grey;
+  }
+}
+

@@ -1,0 +1,36 @@
+<div class="top-playlists">
+    <div class="title">
+        <div class="text">Top playlists</div>
+    </div>
+
+    <div class="list-albums">
+        <div *ngFor="let playlist of topPlaylists"  class="album">
+            <div class="img">
+                <img  [src]="playlist.playlistImgUrl" alt="category img">
+                <div *ngIf="!playlist?.songs.indexOf(playingSong)" class="animation-icon-big">
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                  </div>
+                <div class="buttons" (click)="playPlaylist(playlist)" *ngIf="playlist?.songs.indexOf(playingSong)">
+                    <mat-icon class="options" >play_arrow</mat-icon>
+                </div>
+                <div  class="actions">
+                    <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="user" (click)="addToFavotitePlaylist(playlist)" mat-menu-item >
+                            Like
+                        </button>
+                        <button (click)="sharePlaylist(playlist)" mat-menu-item >
+                            Share
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="name" (click)="goToPlaylist(playlist.id)">
+                {{ playlist.title | titlecase }} - {{playlist.author.userName| titlecase}}
+            </div>  
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+@import 'variables';
+
+@media (max-width: $desktop-small) {
+  .section-title {
+    font-size: $font-26;
+  }
+
+  .section-description {
+    font-size: $font-18;
+  }
+
+  .page-title {
+    font-size: $font-18;
+  }
+
+  .dialog-wrapper {
+    .dialog-header {
+      margin-bottom: 40px;
+
+      .icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .dialog-title {
+      font-size: $font-16;
+    }
+
+    .dialog-subtitle {
+      font-size: $font-12;
+    }
+
+    .dialog-button-wrapper {
+      margin-top: 40px;
+      column-gap: 20px;
+    }
+
+    .dialog-controls {
+      column-gap: 20px;
+    }
+  }
+
+  .filters-container {
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-bottom: 40px;
+
+    .filters-group {
+      .filters-title {
+        font-size: $font-16;
+        margin-bottom: 10px;
+      }
+
+      .filters-item {
+        margin-bottom: 8px;
+        font-size: $font-14;
+      }
+    }
+  }
+
+  .records-not-found {
+    font-size: $font-14;
+  }
+
+  button.default-button {
+    font-size: $font-14;
+    width: 90px;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: $laptop-big) {
+  .section-title {
+    font-size: $font-20;
+  }
+
+  .section-description {
+    font-size: $font-16;
+  }
+
+  .page-title {
+    font-size: $font-16;
+  }
+
+  button.default-button {
+    font-size: $font-12;
+    width: 80px;
+    padding: 6px 0;
+  }
+}
+
+@media (max-width: $tablet-big) {
+  .search-form-field.mat-form-field-appearance-outline {
+    .mat-form-field-prefix {
+      top: 5px;
+    }
+
+    .icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .mat-form-field-flex > .mat-form-field-infix {
+      border-top: none;
+
+      .mat-input-element {
+        font-size: $font-12
+      }
+    }
+
+    .mat-form-field-label {
+      font-size: $font-12;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -10px;
+    }
+  }
+}
+
+@media (max-width: $mobile-big) {
+  .section-container {
+    padding: 0 20px;
+  }
+
+  .auth-block-wrapper {
+    padding: 40px;
+
+    .auth-block-content {
+      width: 330px;
+
+      .auth-block-title {
+        font-size: $font-18;
+      }
+
+      .auth-block-subtitle {
+        font-size: $font-12;
+        margin-top: 20px;
+      }
+
+      .auth-block-input-container {
+        padding-top: 20px;
+
+        .auth-block-form-field {
+          .icon {
+            width: 14px;
+          }
+        }
+      }
+
+      .back-to-login-block {
+        margin-top: 20px;
+        font-size: $font-12;
+
+        .icon {
+          width: 5px;
+          margin-right: 5px;
+        }
+      }
+
+      .default-blue-button {
+        margin-top: 40px;
+        font-size: $font-14;
+        padding: 8px 0;
+      }
+
+      .auth-white-button {
+        font-size: $font-14;
+        padding: 8px 0;
+        margin-top: 40px;
+      }
+    }
+  }
+
+  .search-form-field.mat-form-field-appearance-outline {
+    .mat-form-field-prefix {
+      top: 2px;
+    }
+
+    .icon {
+      width: 12px;
+      height: 12px;
+    }
+
+    .mat-form-field-flex > .mat-form-field-infix {
+      padding: 0.55em 0 0.4em !important;
+
+      .mat-input-element {
+        font-size: $font-10
+      }
+    }
+
+    .mat-form-field-label {
+      font-size: $font-10;
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -7px;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .dialog-wrapper {
+    .dialog-controls {
+      max-width: 250px;
+      margin: 0 auto;
+      row-gap: 24px;
+      flex-wrap: wrap;
+
+      .dialog-clear-filters {
+        position: initial;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-small) {
+  .auth-block-wrapper {
+    padding: 34px;
+
+    .auth-block-content {
+      width: 280px;
+
+      .auth-block-title {
+        font-size: $font-16;
+      }
+
+      .auth-block-subtitle {
+        margin-top: 18px;
+      }
+
+      .auth-block-input-container {
+        padding-top: 18px;
+
+        .auth-block-form-field {
+          .icon {
+            width: 12px;
+          }
+        }
+      }
+
+      .default-blue-button {
+        margin-top: 34px;
+        font-size: $font-12;
+        padding: 8px 0;
+      }
+
+      .auth-white-button {
+        font-size: $font-12;
+        padding: 8px 0;
+        margin-top: 34px;
+      }
+    }
+
+    .dialog-controls {
+      max-width: 250px;
+      margin: 0 auto;
+      row-gap: 24px;
+      flex-wrap: wrap;
+
+      .dialog-clear-filters {
+        position: initial;
+      }
+    }
+  }
+}

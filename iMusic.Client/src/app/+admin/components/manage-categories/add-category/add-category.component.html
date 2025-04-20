@@ -1,0 +1,57 @@
+<div class="dialog-wrapper">
+    <div class="dialog-header">
+      <p class="dialog-title">
+        {{dialogData.isCategoryUpdate ? "Update Category" : "Add New Category"}}
+      </p>
+  
+      <mat-icon [mat-dialog-close]="false" class="icon">
+        close
+      </mat-icon>
+    </div>
+  
+    <div [formGroup]="categoryForm" class="form">
+      <div class="article-field-wrapper">
+        <mat-form-field appearance="outline" class="article-field">
+          <mat-label>Name</mat-label>
+  
+          <input formControlName="name" matInput>
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="categoryForm.controls.name">
+        </mus-control-validation-message>
+      </div>
+  
+      <div (click)="titlePhotoInput.click()" *ngIf="!titlePhotoUrl; else selectedTitlePhoto" class="add-article">
+        <input #titlePhotoInput (change)="attachFile($event)" accept="image/*" type="file">
+  
+        <mat-icon class="icon" >add_circle</mat-icon>
+  
+        <p class="title-text-add">Add Title Photo</p>
+      </div>
+  
+      <ng-template #selectedTitlePhoto>
+        <div class="title-photo-wrapper">
+          <mat-icon (click)="removeTitlePhoto()" class="icon">close</mat-icon>
+  
+          <img [src]="titlePhotoUrl" alt="title-photo" class="title-photo">
+        </div>
+      </ng-template>
+  
+      <button (click)="addNewCategory()"
+              *ngIf="!dialogData.isCategoryUpdate; else updateButton"
+              [disabled]="categoryForm.invalid || !titlePhoto" class="default-button" mat-button>
+            Add
+      </button>
+  
+      <ng-template #updateButton>
+        <button (click)="updateCategory()"
+                [disabled]="categoryForm.invalid || !titlePhotoUrl || (categoryForm.pristine && !isPhotoUpdated)"
+                class="default-button"
+                mat-button>
+            Update
+        </button>
+      </ng-template>
+    </div>
+  </div>
+  

@@ -1,0 +1,23 @@
+<div class="dialog-wrapper">
+    <div class="dialog-header">
+      <p class="dialog-title">Avatar editor</p>
+  
+      <mat-icon [mat-dialog-close]="true" class="icon">
+        close
+      </mat-icon>
+    </div>
+  
+    <image-cropper class="cropper"
+      (imageCropped)="imageCropped($event)"
+      [aspectRatio]="1"
+      [imageChangedEvent]="dialogData"
+      [maintainAspectRatio]="true"
+      format="png"></image-cropper>
+  
+    <div class="dialog-button-wrapper">
+      <button [mat-dialog-close]="false" class="default-button grey-button"
+              mat-button>Cancel</button>
+  
+      <button (click)="save()" class="default-button" mat-button>Save</button>
+    </div>
+  </div>

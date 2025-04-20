@@ -1,0 +1,37 @@
+<div class="wrapper">
+    <div class="title">Manage user who wants to become singer</div>
+    <div class="list-requests">
+        <div *ngIf="usersRequests?.length === 0" class="no-items">
+            Nobody sent request for becoming singer.
+        </div>
+        <div *ngFor="let user of usersRequests">
+            <div class="user">
+
+                <div class="img">
+                    <div *ngIf="!user?.userImgUrl; else name"
+                         class="profile-photo-block-name">
+                         {{user?.firstName[0] | uppercase}}
+                    </div>
+                    <ng-template #name>
+                        <img musBecomeVisibleOnLoaded
+                             [src]="user?.userImgUrl"
+                             alt="avatar"
+                             class="profile-photo hidden">
+                    </ng-template>
+
+                </div>
+                <div class="body">
+                    <div class="username">@{{user?.userName}}</div>
+                    <div class="username">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</div>
+                    <div class="email">{{user?.email}}</div>
+                    <div class="about-us">{{user?.aboutMe | titlecase}}</div>
+                    <div class="buttons">
+                        <button (click)="approveSinger(user.id)" mat-button color="primary">Approve</button>
+                        <button (click)="rejectSinger(user.id)" mat-button color="warn">Reject</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

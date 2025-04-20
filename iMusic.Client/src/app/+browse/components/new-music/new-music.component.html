@@ -1,0 +1,47 @@
+<div class="new-music">
+    <div class="title">
+        <div class="text">New music</div>
+    </div>
+
+    <div class="list-new-music">
+        <div *ngFor="let song of newSongs"  class="newmusic">
+            <div class="img">
+                <img  [src]="song?.songImgUrl" alt="song img">
+                <div class="buttons" (click)="playNewSongs(song)" *ngIf="playingSong?.id !== song.id">
+                    <mat-icon class="options" >play_arrow</mat-icon>
+                </div>
+                <div  class="actions">
+                    <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="user" (click)="addToFavotiteSong(song)" mat-menu-item >
+                            Like
+                        </button>
+                        <button *ngIf="user" (click)="addToSongs(song)" mat-menu-item >
+                            Add to library
+                        </button>
+                        <div *ngIf="user">
+                            <button *ngFor="let playlist of playlists" (click)="addToPlaylist(song,playlist)" mat-menu-item >
+                                Add to Playlist {{playlist.title}}
+                            </button>
+                        </div>
+                        
+                        <button (click)="shareSong(song)" mat-menu-item>
+                          Share
+                        </button>
+                    </mat-menu>
+                </div>
+                <div *ngIf="playingSong?.id === song.id" class="animation-icon-big">
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                  </div>
+            </div>
+            <div class="name">
+                <div>{{ song.title | titlecase }}</div>
+                <div>-</div>
+                <div (click)="goToAlbum(song?.albumId ?? '')" >{{song?.albumTitle ?? "Single" | titlecase}}</div>
+            </div>  
+            
+        </div>
+    </div>
+</div>

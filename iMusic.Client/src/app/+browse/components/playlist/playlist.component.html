@@ -1,0 +1,69 @@
+<div class="wrapper">
+    <div class="playlist">
+        <div class="img">
+            <img [src]="playlist?.playlistImgUrl" alt="playlist image">
+        </div>
+        <div class="description">
+            <div class="title">{{playlist?.title | titlecase }}</div>
+            <div class="author">Author: {{playlist?.author?.userName | titlecase }}</div>
+            <div class="play">
+                <button (click)="playPlaylist()" mat-button class="warn"><mat-icon>play_arrow</mat-icon> Play</button>
+                <div  class="actions">
+                    <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button *ngIf="user" (click)="addToFavotitePlaylist(playlist)" mat-menu-item >
+                            Like
+                        </button>
+                        <button (click)="sharePlaylist(playlist)" mat-menu-item >
+                            Share
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-songs">
+      
+        <div *ngFor="let song of songs" class="song"
+        [ngClass]="{'playing': playingSong?.id === song.id}" >
+            <div class="img" (click)="playSong(song)">
+                <img [src]="song?.songImgUrl" alt="song image">
+            </div>
+            <div *ngIf="playingSong?.id === song.id" class="animation-icon">
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+                <span class="animation-span"></span>
+              </div>
+            <div class="name" (click)="playSong(song)">{{song?.title}}</div>
+            <div class="category" (click)="goToCategory(song?.category?.id)">Category: {{song?.category?.name}}</div>
+            <div class="singer">Singer: {{song?.singerUserName}}</div>
+
+            <div class="duration" (click)="playSong(song)">{{song?.duration}}</div>
+            <div  class="actions">
+                <mat-icon [matMenuTriggerFor]="menu" class="icon">keyboard_control</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button *ngIf="user" (click)="addToFavotiteSong(song)" mat-menu-item >
+                        Like
+                    </button>
+                    <button *ngIf="user" (click)="addToSongs(song)" mat-menu-item >
+                        Add to library
+                    </button>
+                    <div *ngIf="user">
+                        <button *ngFor="let playlist of playlists" (click)="addToPlaylist(song,playlist)" mat-menu-item >
+                            Add to Playlist {{playlist.title}}
+                        </button>
+                    </div>
+                    <button (click)="shareSong(song)" mat-menu-item >
+                        Share
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div>Created: {{playlist?.createdTime | date}}</div>
+        <div>{{songs?.length}} songs, {{totalLength.toFixed(0)}} minutes</div>
+    </div>
+</div>

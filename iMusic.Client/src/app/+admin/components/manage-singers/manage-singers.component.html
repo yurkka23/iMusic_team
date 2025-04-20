@@ -1,0 +1,38 @@
+<div class="wrapper">
+    <div class="title">Manage singers</div>
+    <div class="list-requests">
+        <div *ngIf="users?.length === 0" class="no-items">
+            No singer.
+        </div>
+        <div *ngFor="let user of users">
+            <div class="user">
+
+                <div class="img">
+                    <div *ngIf="!user?.userImgUrl; else name"
+                         class="profile-photo-block-name">
+                         {{user?.firstName[0] | uppercase}}
+                    </div>
+                    <ng-template #name>
+                        <img musBecomeVisibleOnLoaded
+                             [src]="user?.userImgUrl"
+                             alt="avatar"
+                             class="profile-photo hidden">
+                    </ng-template>
+
+                </div>
+                <div class="body">
+                    <div class="username">@{{user?.userName}}</div>
+                    <div class="username">{{user?.firstName | titlecase}} {{user?.lastName | titlecase}}</div>
+                    <div class="email">{{user?.email}}</div>
+                    <div class="about-us">{{user?.aboutMe | titlecase}}</div>
+                    <div class="buttons">
+                        <button (click)="showMore(user.id)" mat-button color="primary">Show more</button>
+                        <button (click)="removeSingerRole(user.id)" mat-button color="warn">Remove </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

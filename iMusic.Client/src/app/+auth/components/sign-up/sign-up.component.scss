@@ -1,0 +1,30 @@
+@import 'src/styles/variables';
+
+.sign-in-divider {
+  font-family: $font-roboto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-14;
+  line-height: 16px;
+  color: $color-grey;
+  padding-top: 50px;
+  position: relative;
+
+  .divider-line {
+    height: 1px;
+    background-color: $color-light-grey;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+  }
+
+  p {
+    background: $color-white;
+    padding: 0 6px;
+    z-index: 1;
+  }
+}
+.sign-in{
+    font-weight: 600;
+}

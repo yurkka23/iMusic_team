@@ -1,0 +1,84 @@
+@import '../../../../../styles/variables.scss';
+
+.dialog-wrapper {
+  .dialog-title {
+    white-space: nowrap;
+  }
+
+  .form {
+    .article-field-wrapper {
+      margin-bottom: 12px;
+      position: relative;
+
+      .symbol-counter {
+        position: absolute;
+        top: 42px;
+        right: 0;
+        font-weight: 300;
+        font-size: $font-10;
+        line-height: 12px;
+      }
+    }
+
+    .article-field {
+      width: 100%;
+      font-size: $font-12;
+
+      &.text-editor {
+        margin-bottom: 0;
+        margin-top: 24px;
+        height: 300px;
+      }
+    }
+
+    .add-article {
+      font-size: $font-14;
+      display: flex;
+      align-items: center;
+      color: $color-blue;
+      cursor: pointer;
+      margin-top: 12px;
+
+      .icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 6px;
+      }
+    }
+
+   
+    .default-button {
+      margin: 10px auto 0 auto;
+    }
+  }
+}
+
+.title-photo-wrapper {
+  margin-top: 22px;
+  position: relative;
+  height: 70px;
+  width: 70px;
+
+  .icon {
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: -18px;
+    right: -10px;
+    color: $color-dark-blue;
+    cursor: pointer;
+  }
+ 
+  .title-photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+}
+
+.title-text-add{
+  margin-left: 10px;
+  margin-top: 10px;
+}

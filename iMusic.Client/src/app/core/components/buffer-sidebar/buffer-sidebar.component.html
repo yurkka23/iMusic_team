@@ -1,0 +1,37 @@
+<div class="sidebar" [ngClass]="{'open': isOpen}">
+
+  <div class="sidebar-header">
+   Autoplay buffer
+  </div>
+
+  <div class="sidebar-content">
+    <div *ngFor="let song of songs"  class="song playing" (click)="play(song)"
+       [ngClass]="{'playing': playingSong.id === song.id}">
+      <div *ngIf="playingSong?.id === song.id" class="animation-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="main">
+      <div class="img">
+        <img [src]="song.songImgUrl" alt="song image">
+      </div>
+      <div>
+        <div class="name">
+          {{song.title}}
+        </div>
+        <div class="singer">
+          {{song.singerUserName}}
+        </div>
+      </div>
+      </div>
+      <div class="time">
+        {{song.duration}}
+      </div>
+    </div>
+    <div *ngIf="!songs || songs?.length == 0" class="no-songs">
+      No upcoming songs
+    </div>
+  </div>
+
+</div>

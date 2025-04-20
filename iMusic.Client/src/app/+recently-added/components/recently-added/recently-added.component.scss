@@ -1,0 +1,263 @@
+.wrapper{
+    padding: 25px;
+    .title{
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        cursor: pointer;
+        .text{
+            font-size: 1.2em;
+
+        }
+        mat-icon {
+            margin-top: 2px;
+            color: grey;
+        }
+    }
+    
+    .list-albums{
+        display: flex;
+        overflow: hidden;
+        gap: 40px;
+        z-index: 1;
+        position: relative;
+        flex-wrap: wrap;
+        .album{
+            position: relative;
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+            .img{
+                width: 13em;
+                height: 13em;
+                position: relative;
+                &:hover::after {
+                    content: "";
+                    background: rgba(71, 71, 71, 0.3);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1;
+                    border-radius: 20px;
+                    transition: 0.3s ease-in-out;
+                }
+                &:hover{
+                    .actions{
+                        display: flex;
+                        padding: 8px;
+                        border-radius: 100%;
+                        position: absolute;
+                        z-index: 9;
+                        bottom: 0.4em;
+                        right: 0.4em;
+                        font-weight: 500;
+                        transition: 0.3s ease-in-out;
+                        cursor: pointer!important;
+                        mat-icon{
+                            width: 30px;
+                            height: 30px;
+                            font-size: 30px;
+                            color: aliceblue;
+                            background-color: grey;
+                            border-radius: 100%;
+                            &:hover{
+                                cursor: pointer;
+                                background-color: red;
+                            }
+                        }
+                    }
+                    .buttons{
+                        display: flex;
+                        flex-direction: column;
+                        padding: 8px;
+                        border-radius: 100%;
+                        position: absolute;
+                        z-index: 9;
+                        bottom: 0.4em;
+                        left: 0.4em;
+                        font-weight: 600;
+                        transition: 0.3s ease-in-out;
+                        mat-icon{
+                            width: 40px;
+                            height: 40px;
+                            font-size: 40px;
+                            color: aliceblue;
+                            background-color: grey;
+                            border-radius: 100%;
+                            &:hover{
+                                cursor: pointer;
+                                background-color: red;
+                            }
+                        }
+                    }
+                }
+            }
+           
+            .name{
+                display: flex;
+                padding: 2px 5px;
+                border-radius: 5px;
+                bottom: 0.7em;
+                font-size: 1em;
+                left: 1em;
+                color: rgb(66, 66, 66);
+                font-weight: 400;
+                max-width: 10em;
+                overflow: hidden;
+                div:nth-child(1):hover{
+                    color: red;
+                    cursor: pointer;
+                }
+                div:nth-child(3):hover{
+                    color: red;
+                    cursor: pointer;
+                } 
+            }
+            .actions{
+                display: none;
+            }
+            .buttons{
+                display: none;
+            }
+        
+        }
+    }
+    //top songs
+    .list-top-songs{
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        .playing{
+            background-color: rgb(216, 3, 3);
+            color: aliceblue;
+            &:hover{
+                background-color: rgb(216, 3, 3) !important;
+                color: aliceblue !important;
+            }
+        }
+        .song{
+            width: 24.8em;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            position: relative;
+            &:hover{
+                background-color: rgb(224, 219, 219);
+                cursor: pointer;
+            }
+            .img{
+                width: 3em;
+                height: 3em;
+                border-radius: 5px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+            .name{
+                margin-left: 20px;
+                font-size: 1em;
+                font-weight: 600;
+                width: 5em;
+                overflow: hidden;
+            }
+            .duration{
+                margin-left: 15em;
+                font-size: 0.7em;
+            }
+            .actions{
+                padding-left: 1em;
+                margin-left: 1em;
+            }       
+        }
+    } 
+}
+
+.animation-icon{
+    position: absolute;
+    margin-left: 17px;
+    display: flex;
+    justify-content: space-between;
+    width: 13px;
+    height: 13px;
+
+
+    .animation-span{
+      width: 3px;
+      height: 100%;
+      background-color: orange;
+      border-radius: 3px;
+      content: '';
+    }
+  }
+
+  .animation-icon-big{
+    position: absolute;
+    margin-left: 17px;
+    bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    width: 13px;
+    height: 13px;
+
+
+    .animation-span{
+      width: 3px;
+      height: 100%;
+      background-color: orange;
+      border-radius: 3px;
+      content: '';
+    }
+  }
+
+
+@keyframes bounce {
+    10% {
+      transform: scaleY(0.3); /* start by scaling to 30% */
+    }
+  
+    30% {
+      transform: scaleY(1); /* scale up to 100% */
+    }
+  
+    60% {
+      transform: scaleY(0.5); /* scale down to 50% */
+    }
+  
+    80% {
+      transform: scaleY(0.75); /* scale up to 75% */
+    }
+  
+    100% {
+      transform: scaleY(0.6); /* scale down to 60% */
+    }
+  }
+
+.animation-span {
+    width: 3px;
+    height: 100%;
+    background-color: orange;
+    border-radius: 3px;
+    animation: bounce 2.2s ease infinite alternate;
+    content: '';
+  }
+  
+  .animation-span {
+    &:nth-of-type(2) {
+      animation-delay: -2.2s; /* Start at the end of animation */
+    }
+  
+    &:nth-of-type(3) {
+      animation-delay: -3.7s; /* Start mid-way of return of animation */
+    }
+  }
+  

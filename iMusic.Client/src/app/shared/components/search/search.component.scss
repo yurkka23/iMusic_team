@@ -1,0 +1,17 @@
+@import '../../../../styles/variables.scss';
+
+.search-form-field {
+  width: 100%;
+  font-size: $font-12;
+  margin-bottom: -1.25em;
+  color: $color-dark-blue;
+  font-family: $font-montserrat;
+}
+
+
+.icon{
+    color: grey;
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+}

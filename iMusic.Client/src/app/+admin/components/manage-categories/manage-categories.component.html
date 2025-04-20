@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div (click)="addCategory()" class="add-category">
+        <mat-icon class="icon">add_circle</mat-icon>
+        <p>Add Category</p>
+    </div>
+    <div class="list-categories">
+        <div *ngFor="let category of categories" >
+            <mus-category [category]="category" (updateEvent)="getCategories()"></mus-category>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,84 @@
+<div class="wrapper">
+    <h1>Recently Added:</h1>
+
+    <div class="break-line"></div>
+
+    <div class="top-songs">
+        <div class="title">
+            <div class="text">Songs</div>
+        </div>
+
+        <div class="list-top-songs">
+            <div *ngFor="let song of songs" class="song"
+                 [ngClass]="{'playing': playingSong?.id === song.id}">
+                <div class="img" (click)="playSong(song)">
+                    <img [src]="song?.songImgUrl" alt="song image">
+                </div>
+                <div *ngIf="playingSong?.id === song.id" class="animation-icon">
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                    <span class="animation-span"></span>
+                  </div>
+                <div class="name" (click)="playSong(song)">{{song?.title}}</div>
+                <div class="duration" (click)="playSong(song)">{{song?.duration}}</div>
+                <div  class="actions">
+                    <mat-icon [matMenuTriggerFor]="menu" class="icon">keyboard_control</mat-icon>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="addToFavoriteSong(song)" mat-menu-item>
+                            Like
+                          </button>
+                        <button (click)="removeSong(song)" mat-menu-item>
+                            Remove
+                          </button>
+                        <button (click)="shareSong(song)" mat-menu-item>
+                          Share
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="title">
+            <div class="text">Albums</div>
+        </div>
+
+        <div class="list-albums">
+            <div *ngFor="let album of albums"  class="album">
+                <div class="img" >
+                    <img [src]="album.albumImgUrl" alt="album img">
+                    <div *ngIf="!album?.songs.indexOf(playingSong)" class="animation-icon-big">
+                        <span class="animation-span"></span>
+                        <span class="animation-span"></span>
+                        <span class="animation-span"></span>
+                      </div>
+
+                    <div class="buttons">
+                        <mat-icon (click)="playAlbums(album)" *ngIf="album?.songs.indexOf(playingSong)" class="options" >play_arrow</mat-icon>
+                    </div>
+
+                    <div  class="actions">
+                        <mat-icon [matMenuTriggerFor]="menu">keyboard_control</mat-icon>
+                        <mat-menu #menu="matMenu">
+                            <button (click)="addToFavoriteAlbum(album)" mat-menu-item>
+                                Like
+                              </button>
+                            <button (click)="removeAlbum(album)" mat-menu-item>
+                                Remove
+                              </button>
+                            <button (click)="shareAlbum(album)" mat-menu-item >
+                                Share
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="name">
+                    <div (click)="goToAlbum(album.id)">{{ album.title | titlecase }}</div>
+                    <div>-</div>
+                    <div (click)="goToCategory(album.category.id)" >{{album.category.name | titlecase}}</div>
+                </div>  
+                
+            </div>
+        </div>
+</div>

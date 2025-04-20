@@ -1,0 +1,82 @@
+<div class="dialog-wrapper">
+    <div class="dialog-header">
+      <p class="dialog-title">
+        {{dialogData.isPlayListUpdate ? "Edit Playlist" : "Add New Playlist"}}
+      </p>
+  
+      <mat-icon [mat-dialog-close]="false" class="icon">
+        close
+      </mat-icon>
+    </div>
+  
+    <div [formGroup]="playlistForm" class="form">
+      <div class="article-field-wrapper">
+        <mat-form-field appearance="outline" class="article-field">
+          <mat-label>Title</mat-label>
+  
+          <input formControlName="title" matInput>
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="playlistForm.controls.title">
+        </mus-control-validation-message>
+      </div>
+
+      <div class="article-field-wrapper">
+        <mat-form-field appearance="outline" class="article-field">
+          <mat-label>Status</mat-label>
+  
+          <mat-select formControlName="status">
+            <mat-option [value]="status.Private">Private</mat-option>
+            <mat-option [value]="status.Public">Public</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+  
+        <mus-control-validation-message
+          [control]="playlistForm.controls.status">
+        </mus-control-validation-message>
+      </div>
+
+     <!-- Photo -->
+      <div (click)="titlePhotoInput.click()" *ngIf="!titlePhotoUrl; else selectedTitlePhoto" class="add-article">
+        <input #titlePhotoInput (change)="attachFile($event)" accept="image/*" type="file">
+  
+        <mat-icon class="icon" >add_circle</mat-icon>
+  
+        <p class="title-text-add">Add Playlist Photo</p>
+      </div>
+  
+      <ng-template #selectedTitlePhoto>
+        <div class="title-photo-wrapper">
+          <mat-icon (click)="removeTitlePhoto()" class="icon">close</mat-icon>
+  
+          <img [src]="titlePhotoUrl" alt="title-photo" class="title-photo">
+        </div>
+      </ng-template>
+     
+      <div class="buttons">
+        <div>
+            <button (click)="addNewPlaylist()"
+                *ngIf="!dialogData.isPlayListUpdate; else updateButton"
+                [disabled]="playlistForm.invalid || !titlePhoto" class="default-button" mat-button>
+                Add
+            </button>
+        </div>
+        
+        <div>
+            <ng-template #updateButton>
+                <button (click)="editPlaylist()"
+                        [disabled]="playlistForm.invalid || !titlePhotoUrl || (playlistForm.pristine && !isPhotoUpdated)"
+                        class="default-button"
+                        mat-button>
+                    Edit
+                </button>
+              </ng-template>
+        </div>
+
+      </div>
+  
+    </div>
+  </div>
+  

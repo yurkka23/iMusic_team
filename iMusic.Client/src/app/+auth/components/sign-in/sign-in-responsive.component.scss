@@ -1,0 +1,8 @@
+@import 'src/styles/variables';
+
+@media (max-width: $mobile-big) {
+  .sing-in-divider {
+    font-size: $font-12;
+    padding-top: 40px;
+  }
+}

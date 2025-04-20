@@ -1,0 +1,38 @@
+<div class="auth-block-wrapper">
+  <div class="auth-block-content">
+    <h2 class="auth-block-title">Welcome to iMusic</h2>
+
+    <div [formGroup]="signInFormGroup" class="auth-block-input-container form">
+      <mat-form-field appearance="outline" class="auth-block-form-field">
+        <mat-label>Email</mat-label>
+
+        <input formControlName="email" matInput placeholder="Email">
+      </mat-form-field>
+
+      <mus-control-validation-message 
+          [control]="signInFormGroup.controls.email">
+      </mus-control-validation-message>
+      
+
+      <mat-form-field appearance="outline" class="auth-block-form-field">
+        <mat-label>Password</mat-label>
+
+        <input [type]="'password'" formControlName="password" matInput
+               placeholder="Password">
+
+      </mat-form-field>
+
+      <mus-control-validation-message
+        [control]="signInFormGroup.controls.password">
+      </mus-control-validation-message> 
+     </div>
+   
+    <button (click)="signInFormSubmit()" [disabled]="signInFormGroup.invalid" class="default-blue-button"
+            mat-button>Sign in</button>
+
+    <div class="sign-in-divider">
+      <p>Don't have an acount?</p>
+      <a [routerLink]="['/auth/sign-up']" class="sign-up" >Sign up</a>
+    </div>
+  </div>
+</div>

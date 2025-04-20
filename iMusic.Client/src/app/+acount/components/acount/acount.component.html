@@ -1,0 +1,189 @@
+<div class="acount-wrapper">
+    <section class="acount-section">   
+        <h1 class="page-title">
+            Account
+        </h1>
+        
+
+    </section>
+    <div class="break-line"></div>
+    
+    <section class="profile-photo-section">
+        <h3 class="profile-page-title">Account Photo</h3>
+  
+        <div class="profile-photo-container">
+          <div class="profile-photo-block">
+            <div *ngIf="!user?.userImgUrl; else name"
+                 class="profile-photo-block-name">{{user?.firstName[0] | uppercase}}</div>
+  
+            <ng-template #name>
+              <img musBecomeVisibleOnLoaded
+                   [src]="user?.userImgUrl"
+                   alt="avatar"
+                   class="profile-photo hidden">
+            </ng-template>
+  
+            <label for="avatar">
+              <mat-icon class="icon">edit</mat-icon>
+            </label>
+            <input (change)="selectAvatar($event)" accept="image/*" id="avatar" type="file">
+          </div>
+  
+          <p
+            class="profile-photo-description profile-page-subtitle">iMusic recommends all users to upload a avatar photo. A photo does not need to show your face, but a friendly smile can help establish trust with other users.</p>
+        </div>
+      </section>
+
+       <section class="profile-info-section">
+        <h3 class="profile-page-title">Personal Info</h3>
+        <div [formGroup]="personalInfoForm" class="form">
+            <div class="form-item">
+              <div class="account-field-wrapper">
+                <mat-form-field appearance="outline" class="account-field">
+                  <mat-label>FirstName</mat-label>
+    
+                  <input formControlName="firstName" matInput>
+                </mat-form-field>
+    
+                <mus-control-validation-message
+                  [control]="personalInfoForm.controls.firstName">
+                </mus-control-validation-message>
+              </div>
+    
+              <div class="account-field-wrapper">
+                <mat-form-field appearance="outline" class="account-field">
+                  <mat-label>LastName</mat-label>
+    
+                  <input formControlName="lastName" matInput>
+                </mat-form-field>
+    
+                <mus-control-validation-message
+                  [control]="personalInfoForm.controls.lastName">
+                </mus-control-validation-message>
+              </div>
+
+              <div class="account-field-wrapper">
+                <mat-form-field appearance="outline" class="account-field">
+                  <mat-label>UserName</mat-label>
+    
+                  <input formControlName="userName" matInput>
+                </mat-form-field>
+    
+                <mus-control-validation-message
+                  [control]="personalInfoForm.controls.userName">
+                </mus-control-validation-message>
+              </div>
+
+              <div class="account-field-wrapper">
+                <mat-form-field appearance="outline" class="account-field">
+                  <mat-label>About me</mat-label>
+    
+                  <input formControlName="aboutMe" matInput>
+                </mat-form-field>
+    
+                <mus-control-validation-message
+                  [control]="personalInfoForm.controls.aboutMe">
+                </mus-control-validation-message>
+              </div>
+    
+               <div class="account-field-wrapper">
+                    <mat-form-field appearance="outline" class="account-field">
+                        <mat-label>Email</mat-label>
+
+                        <input formControlName="email" matInput>
+                    </mat-form-field>
+
+                    <mus-control-validation-message
+                        [control]="personalInfoForm.controls.email">
+                   </mus-control-validation-message>
+                </div>
+    
+             </div>
+            </div>
+            <div class="button-wrapper">
+              <button (click)="updatePersonalInfo()" [disabled]="personalInfoForm | isInvalid"
+                      class="default-button"
+                      mat-button>
+                Save
+              </button>
+            </div>
+    </section> 
+
+    <div class="break-line "></div>
+    <section class="profile-info-section">
+     
+      <h3 class="profile-page-title">Change Password</h3>
+      <div [formGroup]="changePasswordForm" class="form">
+          <div class="form-item">
+            <div class="account-field-wrapper">
+              <mat-form-field appearance="outline" class="account-field">
+                <mat-label>Current Password</mat-label>
+  
+                <input [type]="showOldPassword ? 'text' : 'password'"
+                formControlName="oldPassword" matInput>
+              </mat-form-field>
+  
+              <mus-control-validation-message
+                [control]="changePasswordForm.controls.oldPassword">
+              </mus-control-validation-message>
+            </div>
+
+            
+  
+            <div class="account-field-wrapper">
+              <mat-form-field appearance="outline" class="account-field">
+                <mat-label>New Password</mat-label>
+  
+                <input [type]="showNewPassword ? 'text' : 'password'"
+                     formControlName="newPassword" matInput>
+              </mat-form-field>
+  
+              <mus-control-validation-message
+                [control]="changePasswordForm.controls.newPassword">
+              </mus-control-validation-message>
+            </div>
+
+           
+
+            <div class="account-field-wrapper">
+              <mat-form-field appearance="outline" class="account-field">
+                <mat-label>Confirm New Password</mat-label>
+  
+                <input [type]="showConfirmNewPassword ? 'text' : 'password'"
+                formControlName="confirmNewPassword" matInput>
+               
+              </mat-form-field>
+              
+  
+              <mus-control-validation-message
+                [control]="changePasswordForm.controls.confirmNewPassword">
+              </mus-control-validation-message>
+            </div>
+
+          
+           </div>
+          </div>
+          <div class="button-wrapper">
+            <button (click)="changePassword()" [disabled]="changePasswordForm | isInvalid"
+                    class="default-button"
+                    mat-button>
+              Save
+            </button>
+          </div>
+  </section> 
+
+  <div class="break-line "></div>
+
+  <section *ngIf="(user?.userRoles | checkRole: [applicationRole.UserRole]) && user?.wantToBeSinger == null" class="profile-info-section" >
+    <button (click)="becomeSinger()" class="become-singer-button" mat-button>
+      I'm singer. Sent request for become singer?
+    </button>
+  </section>
+
+  <section *ngIf="(user?.userRoles | checkRole: [applicationRole.UserRole, applicationRole.SingerRole])" class="profile-info-section" >
+    <button (click)="deleteAcount()" class="become-singer-button" mat-button>
+      Delete Acount
+    </button>
+  </section>
+  
+</div>
