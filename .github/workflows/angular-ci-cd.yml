@@ -16,9 +16,6 @@ jobs:
         node-version: [20]
 
     steps:
-    - name: Navigate to Angular project folder
-      run: cd iMusic.Client
-      
     - name: Checkout the source code
       uses: actions/checkout@v3
       
