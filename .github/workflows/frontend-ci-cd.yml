@@ -25,5 +25,5 @@ jobs:
         cache: 'npm'
         cache-dependency-path: './iMusic.Client/package-lock.json'
       
-    - name: CI
+    - name: Angular CI
       run: npm ci
