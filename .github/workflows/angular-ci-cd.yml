@@ -25,11 +25,8 @@ jobs:
         cache: 'npm'
         cache-dependency-path: './iMusic.Client/package-lock.json'
       
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Build
-      run: npm build
+    - name: CI
+      run: npm ci
       
     - name: Run tests
       run: npm test
