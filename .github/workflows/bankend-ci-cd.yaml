@@ -1,5 +1,5 @@
 # Name of the workflow as it appears in GitHub Actions UI
-name: iMusic CI
+name: Backend iMusic CI
 
 # Define when this workflow will run
 on:
@@ -14,7 +14,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: './iMusic/publish'
   DOTNET_VERSION: '8.x'
   SOLUTION_PATH: 'iMusic.sln'
-  API_PROJECT_PATH: 'iMusic'
+  API_PROJECT_PATH: 'iMusic.API'
   PUBLISH_DIR: './publish'
 
 # Define the separate jobs that make up this workflow
