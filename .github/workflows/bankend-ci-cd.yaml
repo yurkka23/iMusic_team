@@ -12,7 +12,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: iMusic
   AZURE_WEBAPP_PACKAGE_PATH: './iMusic.API/publish'
-  DOTNET_VERSION: '8.x'
+  DOTNET_VERSION: '8.0'
   SOLUTION_PATH: 'iMusic.sln'
   API_PROJECT_PATH: 'iMusic.API'
   PUBLISH_DIR: './publish'
