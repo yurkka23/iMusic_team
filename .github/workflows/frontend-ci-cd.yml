@@ -1,29 +1,39 @@
-name: FrontEnd CI/CD
+name: Deploy Angular to Azure App Service
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  frontend:
-    name: Angular Build
+  build_and_deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./iMusic.Client/
-    
     steps:
-    - name: Checkout the source code
-      uses: actions/checkout@v4
-      
-    - name:  Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'npm'
-        cache-dependency-path: './iMusic.Client/package-lock.json'
-      
-    - name: Angular CI
-      run: npm ci
+      - name: Checkout the source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: './iMusic.Client/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./iMusic.Client/
+
+      - name: Build Angular application
+        run: npm run build -- --prod
+        working-directory: ./iMusic.Client/
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'imusic-frontend' 
+          slot-name: 'production' 
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
+          package: './dist/iMusic.Client'
+
