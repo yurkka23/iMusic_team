@@ -19,7 +19,6 @@ import { UserApiService } from 'src/app/core/services/api/user-api.service';
 import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
 import {Clipboard} from '@angular/cdk/clipboard';
 import { FavoritelistApiService } from 'src/app/core/services/api/favoritelist-api.service';
-import { FavoriteListInterface } from 'src/app/core/interfaces/favoritelist/FavoriteList.interface';
 
 @Component({
   selector: 'mus-favorite-list',
@@ -29,7 +28,7 @@ import { FavoriteListInterface } from 'src/app/core/interfaces/favoritelist/Favo
 export class FavoriteListComponent implements OnInit {
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
-  public favoritelist: FavoriteListInterface;
+  public favoritelist: any;
   public playingSong: SongInterface ;
   
   constructor(

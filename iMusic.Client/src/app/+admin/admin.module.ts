@@ -26,7 +26,8 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { UserInterface } from '../../interfaces';
 import { SongInterface } from '../../interfaces/songs/song.interface';
 import { AlbumInterface } from '../../interfaces/album/album.interface';
-import { FavoriteListInterface } from '../../interfaces/favoritelist/FavoriteList.interface';
 import { PlaylistInterface } from '../../interfaces/playlist/playlist.interface';
 
 @Injectable({
@@ -92,11 +91,11 @@ export class AdminApiService {
     return this.httpClient.get<AlbumInterface[]>(`${this.apiUrl}/get-user-added-albums`, { params });
   }
 
-  public getUserFavoriteList(id: string): Observable<FavoriteListInterface> {
+  public getUserFavoriteList(id: string): Observable<any> {
     let params = new HttpParams()
       .append('id', id);
 
-    return this.httpClient.get<FavoriteListInterface>(`${this.apiUrl}/get-user-favoritelist`, { params });
+    return this.httpClient.get<any>(`${this.apiUrl}/get-user-favoritelist`, { params });
   }
 
   public getUserPlaylists(id: string): Observable<PlaylistInterface[]> {

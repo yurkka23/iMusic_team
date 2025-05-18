@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserInterface } from 'src/app/core/interfaces';
 import { AlbumInterface } from 'src/app/core/interfaces/album/album.interface';
-import { FavoriteListInterface } from 'src/app/core/interfaces/favoritelist/FavoriteList.interface';
 import { PlaylistInterface } from 'src/app/core/interfaces/playlist/playlist.interface';
 import { SongInterface } from 'src/app/core/interfaces/songs/song.interface';
 import { NotificationService } from 'src/app/core/services';
@@ -24,7 +23,7 @@ export class UserInfoComponent implements OnInit {
   public user: UserInterface;
   public addedSongs: SongInterface[] = [];
   public addedAlbums: AlbumInterface[] = [];
-  public favoritelist: FavoriteListInterface;
+  public favoritelist: any;
   public userPlaylists: PlaylistInterface[] = [];
 
   constructor(

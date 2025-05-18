@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FavoriteListInterface } from 'src/app/core/interfaces/favoritelist/FavoriteList.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +56,7 @@ export class FavoritelistApiService {
   }
 
 
-  public getFavoritelist(): Observable<FavoriteListInterface> {
-    return this.httpClient.get<FavoriteListInterface>(`${this.apiUrl}/get-favorite-list`);
+  public getFavoritelist(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/get-favorite-list`);
   }
 }
