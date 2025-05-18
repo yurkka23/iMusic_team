@@ -25,14 +25,6 @@ jobs:
         run: npm ci
         working-directory: ./iMusic.Client/
         
-      - name: Check for Angular CLI
-        run: npm install -g @angular/cli # Install Angular CLI globally
-        working-directory: ./iMusic.Client/
-      
-      - name: Build Angular application
-        run: ng build --configuration production # Use Angular CLI to build
-        working-directory: ./iMusic.Client/
-
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
