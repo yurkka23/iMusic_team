@@ -20,22 +20,15 @@ jobs:
           node-version: 20
           cache: 'npm'
           cache-dependency-path: './iMusic.Client/package-lock.json'
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ./iMusic.Client/
-
-      - name: Check for Angular CLI
-        run: npm install -g @angular/cli 
-        working-directory: ./iMusic.Client/
-
-      - name: Check for Angular CLI
-        run: npm install
-        working-directory: ./iMusic.Client/
-      
-      - name: Build Angular application
-        run: ng build
-        working-directory: ./iMusic.Client/
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build --if-present
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: ./dist
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
@@ -43,5 +36,5 @@ jobs:
           app-name: 'imusic-frontend' 
           slot-name: 'production' 
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
-          package: './dist/iMusic.Client'
+          package: './dist'
 
