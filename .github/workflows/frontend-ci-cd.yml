@@ -26,7 +26,7 @@ jobs:
         working-directory: ./iMusic.Client/
 
       - name: Build Angular application
-        run: npm run build -- --prod
+        run: npm run build
         working-directory: ./iMusic.Client/
 
       - name: Deploy to Azure App Service
