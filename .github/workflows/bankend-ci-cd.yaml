@@ -11,7 +11,7 @@ on:
 # Environment variables used throughout the workflow
 env:
   AZURE_WEBAPP_NAME: iMusic
-  AZURE_WEBAPP_PACKAGE_PATH: './iMusic/publish'
+  AZURE_WEBAPP_PACKAGE_PATH: './iMusic.API/publish'
   DOTNET_VERSION: '8.x'
   SOLUTION_PATH: 'iMusic.sln'
   API_PROJECT_PATH: 'iMusic.API'
