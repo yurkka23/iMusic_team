@@ -1,4 +1,4 @@
-name: Deploy Angular to Azure App Service
+name: FrontEnd CI/CD
 
 on:
   push:
@@ -26,21 +26,21 @@ jobs:
         working-directory: ./iMusic.Client/
 
       - name: Check for Angular CLI
-        run: npm install -g @angular/cli 
+        run: npm install -g @angular/cli
         working-directory: ./iMusic.Client/
 
-      - name: Check for Angular CLI
-        run: npm install
-        working-directory: ./iMusic.Client/
-      
       - name: Build Angular application
-        run: ng build
+        run: ng build --configuration production # Use --configuration production for optimized build
         working-directory: ./iMusic.Client/
+
+      - name: List dist contents
+        run: ls -lR dist
+        working-directory: ./iMusic.Client/ # VERY IMPORTANT
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'imusic-frontend' 
-          slot-name: 'production' 
+          app-name: 'imusic-frontend'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_FRONTEND }}
-          package: './dist/iMusic.Client'
+          package: './iMusic.Client/dist' # Adjusted package path
