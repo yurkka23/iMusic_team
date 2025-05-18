@@ -26,7 +26,11 @@ jobs:
         working-directory: ./iMusic.Client/
 
       - name: Check for Angular CLI
-        run: npm install -g @angular/cli # Install Angular CLI globally
+        run: npm install -g @angular/cli 
+        working-directory: ./iMusic.Client/
+
+      - name: Check for Angular CLI
+        run: npm install
         working-directory: ./iMusic.Client/
       
       - name: Build Angular application
