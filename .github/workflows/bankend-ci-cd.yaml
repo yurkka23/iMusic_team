@@ -80,7 +80,12 @@ jobs:
           echo "- Build Number: ${{ github.run_number }}" >> build-report.md
           echo "- Build Status: Success (Linter may have reported issues)" >> build-report.md
           echo "### Unit Test Results:" >> build-report.md
-          ls ${{ github.workspace }}/TestResults/*.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
+          TEST_RESULTS=$(ls ${{ github.workspace }}/TestResults/*.trx)
+          if [[ -n "$TEST_RESULTS" ]]; then
+            ls ${{ github.workspace }}/TestResults/*.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
+          else
+            echo "No test results found." >> build-report.md
+          fi
           echo "### Code Coverage Report:" >> build-report.md
           echo "Link to Code Coverage Artifact: [code-coverage-report-${{ env.BUILD_VERSION }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/code-coverage-report-${{ env.BUILD_VERSION }})" >> build-report.md
           echo "### Linter Report:" >> build-report.md
@@ -116,4 +121,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
