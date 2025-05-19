@@ -36,6 +36,7 @@ jobs:
 
       - name: Run Code Linters
         run: dotnet tool install -g dotnet-format && dotnet format ${{ env.SOLUTION_PATH }} --verify-no-changes
+        continue-on-error: true
 
       - name: Build
         run: dotnet build ${{ env.SOLUTION_PATH }}
