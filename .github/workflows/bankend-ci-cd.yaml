@@ -13,10 +13,11 @@ env:
   SOLUTION_PATH: 'iMusic.sln'
   API_PROJECT_PATH: 'iMusic.API'
   PUBLISH_DIR: './publish'
+  BUILD_VERSION: '0.1.${{ github.run_number }}' # Semantic Versioning (Major.Minor.Patch-BuildNumber)
 
 jobs:
   build-and-test:
-    name: Build and Test
+    name: Build, Test, Lint, Coverage, and Report
     runs-on: ubuntu-latest
 
     steps:
@@ -27,34 +28,68 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore
+      - name: Set Build Version
+        run: echo "BUILD_VERSION=${{ env.BUILD_VERSION }}" >> $GITHUB_ENV
+
+      - name: Restore Dependencies
         run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      - name: Run Code Linters
+        run: dotnet tool install -g dotnet-format && dotnet format ${{ env.SOLUTION_PATH }} --verify-no-changes
 
       - name: Build
         run: dotnet build ${{ env.SOLUTION_PATH }}
           --configuration Release
           --no-restore
+          --version ${{ env.BUILD_VERSION }} # Apply build version
 
-      - name: Test
+      - name: Run Unit Tests and Collect Code Coverage
         run: dotnet test ${{ env.SOLUTION_PATH }}
           --configuration Release
           --no-restore
           --no-build
+          --collect:"XPlat Code Coverage"
+          --results-directory TestResults
           --verbosity normal
 
+      - name: Generate Code Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report-${{ env.BUILD_VERSION }}
+          path: ${{ github.workspace }}/TestResults/*/coverage.cobertura.xml
 
       - name: Publish
         run: dotnet publish ${{ env.API_PROJECT_PATH }}
           --configuration Release
           --no-restore
           --no-build
-          --property:PublishDir=${{ env.PUBLISH_DIR }}
+          --output ${{ env.PUBLISH_DIR }}
+          --version ${{ env.BUILD_VERSION }} # Apply build version
+
+      - name: Generate Build Report
+        run: |
+          echo "## Build Report - ${{ env.BUILD_VERSION }}" >> build-report.md
+          echo "- Commit: ${{ github.sha }}" >> build-report.md
+          echo "- Branch: ${{ github.ref_name }}" >> build-report.md
+          echo "- Build Number: ${{ github.run_number }}" >> build-report.md
+          echo "- Build Status: Success" >> build-report.md # Assuming success if this step is reached
+          echo "### Unit Test Results:" >> build-report.md
+          ls ${{ github.workspace }}/TestResults/*.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
+          echo "### Code Coverage Report:" >> build-report.md
+          echo "Link to Code Coverage Artifact: [code-coverage-report-${{ env.BUILD_VERSION }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/code-coverage-report-${{ env.BUILD_VERSION }})" >> build-report.md
+        continue-on-error: true # Allow report generation even if tests fail
+
+      - name: Upload Build Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-report-${{ env.BUILD_VERSION }}
+          path: build-report.md
 
       - name: Publish Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: webapp 
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          name: webapp-${{ env.BUILD_VERSION }}
+          path: ${{ env.PUBLISH_DIR }}
 
   deploy:
     name: Deploy to Azure
@@ -65,12 +100,12 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: webapp
+          name: webapp-${{ needs.build-and-test.outputs.build_version }}
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-      - name: Deploy
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
