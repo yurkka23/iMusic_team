@@ -13,7 +13,7 @@ env:
   SOLUTION_PATH: 'iMusic.sln'
   API_PROJECT_PATH: 'iMusic.API'
   PUBLISH_DIR: './publish'
-  BUILD_VERSION: '0.1.${{ github.run_number }}' # Semantic Versioning (Major.Minor.Patch-BuildNumber)
+  BUILD_VERSION: '0.1.${{ github.run_number }}' # Default build version
 
 jobs:
   build-and-test:
@@ -29,20 +29,25 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Set Build Version
-        run: echo "BUILD_VERSION=${{ env.BUILD_VERSION }}" >> $GITHUB_ENV
+        run: |
+          if [[ -n "${{ github.event.inputs.build_version }}" ]]; then
+            echo "BUILD_VERSION=${{ github.event.inputs.build_version }}" >> $GITHUB_ENV
+          else
+            echo "BUILD_VERSION=${{ env.BUILD_VERSION }}" >> $GITHUB_ENV
+          fi
 
       - name: Restore Dependencies
         run: dotnet restore ${{ env.SOLUTION_PATH }}
 
       - name: Run Code Linters
         run: dotnet tool install -g dotnet-format && dotnet format ${{ env.SOLUTION_PATH }} --verify-no-changes
-        continue-on-error: true
+        continue-on-error: true # Allow CI to proceed even if linter fails
 
       - name: Build
         run: dotnet build ${{ env.SOLUTION_PATH }}
           --configuration Release
           --no-restore
-          --version ${{ env.BUILD_VERSION }} # Apply build version
+          /p:Version=${{ env.BUILD_VERSION }} # Use /p: to set the Version property
 
       - name: Run Unit Tests and Collect Code Coverage
         run: dotnet test ${{ env.SOLUTION_PATH }}
@@ -65,7 +70,7 @@ jobs:
           --no-restore
           --no-build
           --output ${{ env.PUBLISH_DIR }}
-          --version ${{ env.BUILD_VERSION }} # Apply build version
+          /p:Version=${{ env.BUILD_VERSION }} # Use /p: to set the Version property
 
       - name: Generate Build Report
         run: |
@@ -73,11 +78,13 @@ jobs:
           echo "- Commit: ${{ github.sha }}" >> build-report.md
           echo "- Branch: ${{ github.ref_name }}" >> build-report.md
           echo "- Build Number: ${{ github.run_number }}" >> build-report.md
-          echo "- Build Status: Success" >> build-report.md # Assuming success if this step is reached
+          echo "- Build Status: Success (Linter may have reported issues)" >> build-report.md
           echo "### Unit Test Results:" >> build-report.md
           ls ${{ github.workspace }}/TestResults/*.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
           echo "### Code Coverage Report:" >> build-report.md
           echo "Link to Code Coverage Artifact: [code-coverage-report-${{ env.BUILD_VERSION }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/code-coverage-report-${{ env.BUILD_VERSION }})" >> build-report.md
+          echo "### Linter Report:" >> build-report.md
+          echo "Please review the workflow output for potential linter warnings or errors." >> build-report.md
         continue-on-error: true # Allow report generation even if tests fail
 
       - name: Upload Build Report Artifact
