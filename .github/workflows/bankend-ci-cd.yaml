@@ -73,6 +73,15 @@ jobs:
           --output ${{ env.PUBLISH_DIR }}
           /p:Version=${{ env.BUILD_VERSION }}
 
+      - name: Debug List Files in TestResults Subdirectories
+        run: ls -R ${{ github.workspace }}/TestResults
+
+      - name: Debug Check for TRX files in subdirectories
+        run: find ${{ github.workspace }}/TestResults -name "*.trx" -print
+
+      - name: Debug Check for TRX files in subdirectories11
+        run: find ${{ github.workspace }}/TestResults/
+        
       - name: Generate Build Report
         run: |
           echo "## Build Report - ${{ env.BUILD_VERSION }}" >> build-report.md
