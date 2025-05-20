@@ -56,6 +56,7 @@ jobs:
           --no-build
           --collect:"XPlat Code Coverage"
           --results-directory TestResults
+          --logger:"VSTest;LogFilePath=${{ github.workspace }}/TestResults/TestResults.trx"
           --verbosity normal
         working-directory: ${{ github.workspace }}
 
@@ -81,9 +82,9 @@ jobs:
           echo "- Build Number: ${{ github.run_number }}" >> build-report.md
           echo "- Build Status: Success (Linter may have reported issues)" >> build-report.md
           echo "### Tests Results:" >> build-report.md
-          TEST_RESULTS=$(ls ${{ github.workspace }}/TestResults/*/coverage.cobertura.xml)
+          TEST_RESULTS=$(ls ${{ github.workspace }}/TestResults/TestResults.trx)
           if [[ -n "$TEST_RESULTS" ]]; then
-            ls ${{ github.workspace }}/TestResults/*/coverage.cobertura.xml | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
+            ls ${{ github.workspace }}/TestResults/TestResults.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
           else
             echo "No test results found." >> build-report.md
           fi
