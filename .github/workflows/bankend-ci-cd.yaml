@@ -13,7 +13,7 @@ env:
   SOLUTION_PATH: 'iMusic.sln'
   API_PROJECT_PATH: 'iMusic.API'
   PUBLISH_DIR: './publish'
-  BUILD_VERSION: '0.1.${{ github.run_number }}' # Default build version
+  BUILD_VERSION: '0.1.${{ github.run_number }}'
 
 jobs:
   build-and-test:
@@ -81,7 +81,7 @@ jobs:
           echo "- Build Number: ${{ github.run_number }}" >> build-report.md
           echo "- Build Status: Success (Linter may have reported issues)" >> build-report.md
           echo "### Tests Results:" >> build-report.md
-          TEST_RESULTS=$(ls ${{ github.workspace }}/TestResults/*.trx)
+          TEST_RESULTS=$(ls ${{ github.workspace }}/TestResults/*/*.trx)
           if [[ -n "$TEST_RESULTS" ]]; then
             ls ${{ github.workspace }}/TestResults/*.trx | xargs -I {} bash -c 'echo "```xml"; cat "{}"; echo "```"' >> build-report.md
           else
