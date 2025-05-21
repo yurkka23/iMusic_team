@@ -30,12 +30,12 @@ jobs:
         working-directory: ./iMusic.Client/
 
       - name: Build Angular application
-        run: ng build --configuration production # Use --configuration production for optimized build
+        run: ng build --configuration production
         working-directory: ./iMusic.Client/
 
       - name: List dist contents
         run: ls -lR dist
-        working-directory: ./iMusic.Client/ # VERY IMPORTANT
+        working-directory: ./iMusic.Client/
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
